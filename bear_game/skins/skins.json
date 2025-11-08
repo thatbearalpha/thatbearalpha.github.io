@@ -4,13 +4,13 @@
     "price": 0,
     "rarity": { "text": "Default", "color": "#8d8f8e", "textColor": "#000000" },
     "credit": "N/A",
-    "image": "/bear_game/skins/assets/neon_runner.png"
+    "image": "/bear_game/skins/assets/BearIdle.png"
   },
   {
     "name": "Beta",
     "price": 0,
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "N/A",
-    "image": "/bear_game/skins/assets/neon_runner.png"
+    "image": "/bear_game/skins/assets/Bear_With_Cheese_Idle.png"
   }
 ]
