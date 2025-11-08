@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Roblox BEAR wiki</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: #f8fafc;
+      color: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .container {
+      text-align: center;
+      background: white;
+      padding: 30px;
+      border-radius: 14px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 340px;
+    }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+    button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 8px;
+      border: none;
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #1e4fc2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Roblox BEAR wiki</h1>
+    <button id="randomPage">Random Wiki Page</button>
+    <button id="homePage">Wiki Home</button>
+  </div>
+
+  <script>
+    // Base URL for the wiki
+    const baseWiki = "https://roblox-bear.fandom.com/wiki/";
+
+    // Example pages — add or edit as you like
+    const pages = [
+      "Bear_(Alpha)",
+      "BEAR_(Gamepass)",
+      "Cheese_Factory",
+      "Sam",
+      "Map",
+      "Bear_Skins",
+      "Survivor",
+      "Game_Modes",
+      "Codes",
+      "Infection_Mode"
+    ];
+
+    // Pick a random page and open it
+    document.getElementById("randomPage").addEventListener("click", () => {
+      const random = pages[Math.floor(Math.random() * pages.length)];
+      window.open(baseWiki + random, "_blank");
+    });
+
+    // Go to wiki home
+    document.getElementById("homePage").addEventListener("click", () => {
+      window.open(baseWiki, "_blank");
+    });
+  </script>
+</body>
+</html>
