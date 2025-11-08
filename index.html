@@ -1,123 +1,59 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Thatbearalpha's site</title>
+  <title>Thatbearalpha's Site</title>
   <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      background: #fff;
-      color: #000;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    }
-
-    .page {
-      max-width: 760px;
-      margin: 28px auto;
-      padding: 18px;
-    }
-
-    header {
+    body {
+      background-color: white;
+      color: black;
+      font-family: Arial, sans-serif;
+      margin: 40px;
       text-align: center;
-      margin-bottom: 12px;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 26px;
-      font-weight: 800;
     }
 
-    .hero {
-      text-align: center;
-      margin: 18px 0;
+    h1 {
+      font-weight: bold;
+      margin-bottom: 10px;
     }
-    .hero img {
-      max-width: 360px;
-      width: 70%;
+
+    img {
+      width: 300px;
       height: auto;
-      border-radius: 8px;
+      margin-bottom: 30px;
     }
 
-    .utilities {
-      margin-top: 20px;
+    .content {
       text-align: left;
-    }
-    .utilities h2 {
-      margin: 0 0 10px 0;
-      font-size: 18px;
-      font-weight: 700;
-    }
-
-    /* Blue buttons */
-    .btn {
       display: inline-block;
-      padding: 12px 14px;
-      margin: 8px 0;
-      border-radius: 8px;
-      border: none;
-      background: #2563eb; /* blue */
+    }
+
+    .button {
+      display: block;
+      width: 250px;
+      padding: 15px;
+      background-color: #007BFF;
       color: white;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
       text-align: center;
-      transition: background 0.2s;
+      text-decoration: none;
+      border-radius: 8px;
+      margin: 10px 0;
+      font-size: 16px;
+      transition: background-color 0.2s ease;
     }
 
-    .btn:hover {
-      background: #1e4fc2; /* darker blue hover */
-    }
-
-    /* Different widths */
-    .btn-short {
-      width: 40%;
-      min-width: 110px;
-    }
-    .btn-long {
-      width: 80%;
-      min-width: 180px;
-    }
-
-    @media (max-width: 420px) {
-      .btn-short, .btn-long {
-        width: 90%;
-      }
+    .button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <header>
-      <h1>Thatbearalpha's site</h1>
-    </header>
+  <h1>Thatbearalpha's site</h1>
+  <img src="https://i.postimg.cc/QtNqTGY5/1000002812-removebg-preview.png" alt="Bear Image">
 
-    <div class="hero">
-      <img
-        src="https://static.wikia.nocookie.net/roblox-bear-content/images/e/e0/Bear_Relaxing.png/revision/latest?cb=20210226171912"
-        alt="Bear relaxing"
-      />
-    </div>
-
-    <section class="utilities" aria-labelledby="utils-title">
-      <h2 id="utils-title">BEAR Wiki utilities</h2>
-
-      <a id="randomPage" class="btn btn-short">Random Wiki Page</a><br>
-      <a id="homePage" class="btn btn-long">Wiki Home</a>
-    </section>
+  <div class="content">
+    <h2>BEAR Wiki utilities</h2>
+    <a href="https://example1.com" class="button">Random Page</a>
+    <a href="https://example2.com" class="button">Other Tool</a>
   </div>
-
-  <script>
-    const randomUrl = "https://roblox-bear.fandom.com/wiki/Special:Random";
-    const homeUrl = "https://roblox-bear.fandom.com/wiki/Roblox_BEAR_Wiki";
-
-    document.getElementById("randomPage").addEventListener("click", () => {
-      window.open(randomUrl, "_blank");
-    });
-    document.getElementById("homePage").addEventListener("click", () => {
-      window.open(homeUrl, "_blank");
-    });
-  </script>
 </body>
 </html>
