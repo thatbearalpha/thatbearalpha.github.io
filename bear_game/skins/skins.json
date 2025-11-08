@@ -20,4 +20,11 @@
     "credit": "N/A",
     "image": "/bear_game/skins/assets/SAM.png"
   },
+  {
+    "name": "ThatBearAlpha",
+    "price": "N/A",
+    "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
+    "credit": "N/A",
+    "image": "/bear_game/skins/assets/Thatbearalpha.png"
+  }
 ]
