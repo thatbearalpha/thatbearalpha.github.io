@@ -8,9 +8,16 @@
   },
   {
     "name": "Beta",
-    "price": 0,
+    "price": "N/A",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "N/A",
     "image": "/bear_game/skins/assets/Bear_With_Cheese_Idle.png"
-  }
+  },
+  {
+    "name": "Sam",
+    "price": "N/A",
+    "rarity": { "text": "Secret", "color": "#8d16f5", "textColor": "#ffffff" },
+    "credit": "N/A",
+    "image": "/bear_game/skins/assets/SAM.png"
+  },
 ]
