@@ -41,42 +41,31 @@
       border-radius: 8px;
     }
 
-    .utilities {
-      margin-top: 20px;
+    .description {
       text-align: center;
+      max-width: 620px;
+      margin: 0 auto 24px auto;
+      font-size: 16px;
+      color: #333;
     }
-    .utilities h2 {
-      margin: 0 0 10px 0;
+
+    .links {
+      text-align: center;
       font-size: 18px;
-      font-weight: 700;
+      margin-top: 24px;
     }
 
-    /* Blue buttons */
-    .btn {
-      display: inline-block;
-      padding: 12px 14px;
-      margin: 8px;
-      border-radius: 8px;
-      border: none;
-      background: #2563eb;
-      color: white;
+    .links a {
+      display: block;
+      color: #2563eb;
+      text-decoration: underline;
       font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      text-align: center;
-      transition: background 0.2s;
-      width: 60%;
-      min-width: 140px;
+      margin: 10px 0;
+      transition: color 0.2s;
     }
 
-    .btn:hover {
-      background: #1e4fc2;
-    }
-
-    @media (max-width: 420px) {
-      .btn {
-        width: 90%;
-      }
+    .links a:hover {
+      color: #1e4fc2;
     }
   </style>
 </head>
@@ -93,42 +82,15 @@
       />
     </div>
 
-    <!-- Profiles section -->
-    <section class="utilities" aria-labelledby="profile-title">
-      <h2 id="profile-title">Profiles</h2>
-      <a id="ytButton" class="btn">YouTube Channel</a><br>
-      <a id="rbxButton" class="btn">Roblox Profile</a>
-    </section>
+    <p class="description">
+      Welcome to my site! This is a central hub for my projects, profiles, and BEAR Wiki utilities.
+      (You can edit this line anytime to change the site description.)
+    </p>
 
-    <!-- Wiki section -->
-    <section class="utilities" aria-labelledby="utils-title">
-      <h2 id="utils-title">BEAR Wiki utilities</h2>
-      <a id="randomPage" class="btn">Random Wiki Page</a><br>
-      <a id="homePage" class="btn">Wiki Home</a>
-    </section>
+    <div class="links">
+      <a href="/profiles">Profiles →</a>
+      <a href="/wiki_utilities">BEAR Wiki Utilities →</a>
+    </div>
   </div>
-
-  <script>
-    const randomUrl = "https://roblox-bear.fandom.com/wiki/Special:Random";
-    const homeUrl = "https://roblox-bear.fandom.com/wiki/Roblox_BEAR_Wiki";
-    const ytUrl = "https://youtube.com/@thatbearalpha";
-    const rbxUrl = "https://www.roblox.com/users/4903858283/profile";
-
-    document.getElementById("randomPage").addEventListener("click", () => {
-      window.open(randomUrl, "_blank");
-    });
-
-    document.getElementById("homePage").addEventListener("click", () => {
-      window.open(homeUrl, "_blank");
-    });
-
-    document.getElementById("ytButton").addEventListener("click", () => {
-      window.open(ytUrl, "_blank");
-    });
-
-    document.getElementById("rbxButton").addEventListener("click", () => {
-      window.open(rbxUrl, "_blank");
-    });
-  </script>
 </body>
 </html>
