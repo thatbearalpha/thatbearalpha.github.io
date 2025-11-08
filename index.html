@@ -54,32 +54,15 @@
   </div>
 
   <script>
-    // Base URL for the wiki
-    const baseWiki = "https://roblox-bear.fandom.com/wiki/";
+    const randomUrl = "https://roblox-bear.fandom.com/wiki/Special:Random";
+    const homeUrl = "https://roblox-bear.fandom.com/wiki/Roblox_BEAR_Wiki";
 
-    // Example pages — add or edit as you like
-    const pages = [
-      "Bear_(Alpha)",
-      "BEAR_(Gamepass)",
-      "Cheese_Factory",
-      "Sam",
-      "Map",
-      "Bear_Skins",
-      "Survivor",
-      "Game_Modes",
-      "Codes",
-      "Infection_Mode"
-    ];
-
-    // Pick a random page and open it
     document.getElementById("randomPage").addEventListener("click", () => {
-      const random = pages[Math.floor(Math.random() * pages.length)];
-      window.open(baseWiki + random, "_blank");
+      window.open(randomUrl, "_blank");
     });
 
-    // Go to wiki home
     document.getElementById("homePage").addEventListener("click", () => {
-      window.open(baseWiki, "_blank");
+      window.open(homeUrl, "_blank");
     });
   </script>
 </body>
