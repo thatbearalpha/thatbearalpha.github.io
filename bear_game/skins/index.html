@@ -100,7 +100,7 @@
       nameEl.textContent = item.name || 'Unnamed Skin';
       nameEl.title = item.name || '';
 
-      priceEl.textContent = item.price !== undefined ? ('$' + item.price) : '';
+      priceEl.textContent = item.price !== undefined ? ('Q' + item.price) : '';
 
       // Rarity can be a string, or an object { text, color }
       if(typeof item.rarity === 'string'){
