@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>skins - Bear Alpha Game</title>
+  <title>Skins</title>
   <style>
     :root{
       --max-width: 900px;
@@ -49,7 +49,7 @@
       <h1>skins</h1>
     </header>
 
-    <p class="lead">This page lists skins for the Bear Alpha Game. Edit <code>skins.json</code> to add or change skins. Images can be stored in <code>/bear_game/skins/assets/</code> or as external URLs.</p>
+    <p class="lead">This page lists all the skins for Bear Alpha Game, with credits and rarities.
 
     <div class="links">
       <a href="/bear_game">← Back to Bear Alpha Game</a>
@@ -100,7 +100,7 @@
       nameEl.textContent = item.name || 'Unnamed Skin';
       nameEl.title = item.name || '';
 
-      priceEl.textContent = item.price !== undefined ? ('Q' + item.price) : '';
+      priceEl.textContent = item.price !== undefined ? (item.price + ' Quidz') : '';
 
       // Rarity can be a string, or an object { text, color }
       if(typeof item.rarity === 'string'){
