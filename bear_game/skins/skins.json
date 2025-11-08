@@ -1,23 +1,16 @@
 [
   {
-    "name": "Forest Bear",
-    "price": 100,
-    "rarity": "Common",
-    "credit": "Thatbearalpha",
-    "image": "/bear_game/skins/assets/forest_bear.png"
-  },
-  {
-    "name": "Neon Runner",
-    "price": 350,
-    "rarity": { "text": "Rare", "color": "#3b82f6", "textColor": "#ffffff" },
-    "credit": "SkinMaker123",
+    "name": "Bear",
+    "price": 0,
+    "rarity": { "text": "Default", "color": "#8d8f8e", "textColor": "#000000" },
+    "credit": "N/A",
     "image": "/bear_game/skins/assets/neon_runner.png"
   },
   {
-    "name": "Golden Monarch",
-    "price": 1200,
-    "rarity": { "text": "Legendary", "color": "#f59e0b" },
-    "credit": "ArtistName",
-    "image": "https://example.com/external/golden_monarch.png"
+    "name": "Beta",
+    "price": 0,
+    "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
+    "credit": "N/A",
+    "image": "/bear_game/skins/assets/neon_runner.png"
   }
 ]
