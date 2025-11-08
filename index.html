@@ -42,7 +42,7 @@
 
     .utilities {
       margin-top: 20px;
-      text-align: left;
+      text-align: center;
     }
     .utilities h2 {
       margin: 0 0 10px 0;
@@ -54,34 +54,26 @@
     .btn {
       display: inline-block;
       padding: 12px 14px;
-      margin: 8px 0;
+      margin: 8px;
       border-radius: 8px;
       border: none;
-      background: #2563eb; /* blue */
+      background: #2563eb;
       color: white;
       font-weight: 600;
       text-decoration: none;
       cursor: pointer;
       text-align: center;
       transition: background 0.2s;
+      width: 60%;
+      min-width: 140px;
     }
 
     .btn:hover {
-      background: #1e4fc2; /* darker blue hover */
-    }
-
-    /* Different widths */
-    .btn-short {
-      width: 40%;
-      min-width: 110px;
-    }
-    .btn-long {
-      width: 80%;
-      min-width: 180px;
+      background: #1e4fc2;
     }
 
     @media (max-width: 420px) {
-      .btn-short, .btn-long {
+      .btn {
         width: 90%;
       }
     }
@@ -103,8 +95,8 @@
     <section class="utilities" aria-labelledby="utils-title">
       <h2 id="utils-title">BEAR Wiki utilities</h2>
 
-      <a id="randomPage" class="btn btn-short">Random Wiki Page</a><br>
-      <a id="homePage" class="btn btn-long">Wiki Home</a>
+      <a id="randomPage" class="btn">Random Wiki Page</a><br>
+      <a id="homePage" class="btn">Wiki Home</a>
     </section>
   </div>
 
