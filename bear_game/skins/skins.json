@@ -3,26 +3,26 @@
     "name": "Bear",
     "price": 0,
     "rarity": { "text": "Default", "color": "#8d8f8e", "textColor": "#000000" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/BearIdle.png"
   },
   {
     "name": "Beta",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/Bear_With_Cheese_Idle.png"
   },
   {
     "name": "Sam",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Secret", "color": "#8d16f5", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/SAM.png"
   },
   {
     "name": "ThatBearAlpha",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "Thatbearalpha",
     "image": "/bear_game/skins/assets/Thatbearalpha.png"
@@ -31,14 +31,14 @@
     "name": "8-Bit",
     "price": "100",
     "rarity": { "text": "Regular", "color": "#a8a8a8", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/8-bit_idle.png"
   },
   {
     "name": "Bear_Swagger999",
     "price": "350",
     "rarity": { "text": "Regular", "color": "#a8a8a8", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/Bear_swagger999_Idle.png"
   },
   {
@@ -52,63 +52,63 @@
     "name": "Eerie Pumpkin",
     "price": "750",
     "rarity": { "text": "Halloween", "color": "#ff7003", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/Classic_Pumpkin_New_Idle.png"
   },
   {
     "name": "Lagoon",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/LagoonHimself.webp"
   },
   {
     "name": "Whitey",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Secret", "color": "#8d16f5", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/Whitey_New.png"
   },
   {
     "name": "Imposter",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Secret", "color": "#8d16f5", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/Imposter.png"
   },
   {
     "name": "Morgan Freeman",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/images.jpg"
   },
   {
     "name": "Ghost",
     "price": "800",
     "rarity": { "text": "Halloween", "color": "#ff7003", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/Ghostidle.png"
   },
   {
     "name": "Psycho",
     "price": "950",
     "rarity": { "text": "Halloween", "color": "#ff7003", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/Psycho_idle_HD.png"
   },
   {
     "name": "Blizzard",
     "price": "700",
     "rarity": { "text": "Christmas", "color": "#1ddbde", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/Blizzard_Idle.png"
   },
   {
     "name": "Snowbear",
     "price": "750",
     "rarity": { "text": "Christmas", "color": "#1ddbde", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/SnowBear_Idle.png"
   },
   {
@@ -122,7 +122,7 @@
     "name": "Buckethead",
     "price": "300",
     "rarity": { "text": "Regular", "color": "#a8a8a8", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/Bucket_Moment.png"
   },
   {
@@ -134,7 +134,7 @@
   },
   {
     "name": "Lenny",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Secret", "color": "#8d16f5", "textColor": "#ffffff" },
     "credit": "Scpbaconjesus2012",
     "image": "/bear_game/skins/assets/lennybear.png"
@@ -162,21 +162,21 @@
   },
   {
     "name": "Bloxy Cola Bear",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "Agtbacon",
     "image": "/bear_game/skins/assets/bloxybear.png"
   },
   {
     "name": "Balloon Boy",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Dev", "color": "#020b2e", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/balloonboy.png"
   },
   {
     "name": "Cinco De Red Robin",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Secret", "color": "#8d16f5", "textColor": "#ffffff" },
     "credit": "Sang Woo / NOT_Sang Woo",
     "image": "/bear_game/skins/assets/CincoWhitey.png"
@@ -197,16 +197,16 @@
   },
   {
     "name": "Neon Lagoon",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Secret", "color": "#8d16f5", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/Neon_Lagoon.png"
   },
   {
     "name": "Frozen Samta",
     "price": "600",
     "rarity": { "text": "Christmas", "color": "#1ddbde", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/Frozen_Samta_Idle.png"
   },
   {
@@ -218,9 +218,9 @@
   },
   {
     "name": "Neon Whitey",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/WhiteyNeon.png"
   },
   {
@@ -232,72 +232,72 @@
   },
   {
     "name": "Cinco De Lagoon",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Secret", "color": "#8d16f5", "textColor": "#ffffff" },
     "credit": "Sang Woo / NOT_Sang Woo",
     "image": "/bear_game/skins/assets/CincoLagoon.png"
   },
   {
     "name": "Bob (broken)",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Dev", "color": "#020b2e", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/HDBobimage.png"
   },
   {
     "name": "Red Robin",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Secret", "color": "#8d16f5", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/Red_robin_idle.png"
   },
   {
     "name": "Cinco De Boyo",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/cincoboyo.png"
   },
   {
     "name": "Blizzard Deluxe Edition",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "scpbaconjesus2012",
     "image": "/bear_game/skins/assets/DelBlizzard.png"
   },
   {
     "name": "Dithered Bear (giftbox)",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/Ditheredidle.webp"
   },
   {
     "name": "Giftbox2 (Coming soon)",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/Placeholder.png"
   },
   {
     "name": "Cinco De Whitey",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Secret", "color": "#8d16f5", "textColor": "#ffffff" },
     "credit": "Sang Woo / NOT_Sang Woo",
     "image": "/bear_game/skins/assets/Cinco_De_Whitey.png"
   },
   {
     "name": "Beartube",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Special", "color": "#db12b3", "textColor": "#ffffff" },
     "credit": "Sang Woo / NOT_Sang Woo",
     "image": "/bear_game/skins/assets/beartube.webp"
   },
   {
     "name": "R_3tr_0",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Secret", "color": "#8d16f5", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/4th_Anniversary_Idle.png"
   },
   {
@@ -309,49 +309,49 @@
   },
   {
     "name": "Puffle Stack",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Dev", "color": "#020b2e", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/stack.png"
   },
   {
     "name": "Deleted Atrocity",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "Lovebearalpha",
     "image": "/bear_game/skins/assets/deleted_atrocity.png"
   },
   {
     "name": "Molten Choco Bear",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
-    "credit": "N/A",
+    "credit": "",
     "image": "/bear_game/skins/assets/Molten_Choco_Bear_Idle.png"
   },
   {
     "name": "Spider Vector",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "@AdidasKingYT / adumnob",
     "image": "/bear_game/skins/assets/SpiderVector.png"
   },
   {
     "name": "Pixel Lord",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Regular", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "Thatbearalpha",
     "image": "/bear_game/skins/assets/PixelLord.png"
   },
   {
     "name": "The Alien From Mars",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "Regular", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "Thatbearalpha",
     "image": "/bear_game/skins/assets/AlienFromMars.png"
   },
   {
     "name": "Unfinished",
-    "price": "N/A",
+    "price": "",
     "rarity": { "text": "!", "color": "#d90902", "textColor": "#ffffff" },
     "credit": "This section is not finished and will be finished soon",
     "image": "/bear_game/skins/assets/Placeholder.png"
