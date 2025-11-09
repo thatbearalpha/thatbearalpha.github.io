@@ -337,14 +337,14 @@
   },
   {
     "name": "Pixel Lord",
-    "price": "",
-    "rarity": { "text": "Regular", "color": "#0080ff", "textColor": "#ffffff" },
+    "price": "1050",
+    "rarity": { "text": "Regular", "color": "#a8a8a8", "textColor": "#ffffff" },
     "credit": "Thatbearalpha",
     "image": "/bear_game/skins/assets/PixelLord.png"
   },
   {
     "name": "The Alien From Mars",
-    "price": "",
+    "price": "550",
     "rarity": { "text": "Regular", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "Thatbearalpha",
     "image": "/bear_game/skins/assets/AlienFromMars.png"
