@@ -1,165 +1,168 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/ico" href="/Bear_chance_icon.ico">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bear Alpha Runner Game</title>
+  <title>Bear Alpha Runner</title>
   <style>
-    html, body {
-      margin: 0;
-      background: #fff;
-      color: #000;
+    :root{
+      --game-size: 400px;
+      --ui-width: 400px;
+    }
+    html,body{
+      height:100%;
+      margin:0;
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      height: 100%;
-      touch-action: none; /* Prevents scrolling while using controls */
+      background:#fff;
+      color:#000;
+      overflow:hidden; /* make page unscrollable */
+      -webkit-user-select:none;
+      -ms-user-select:none;
+      user-select:none;
+      touch-action:none;
     }
 
-    .page {
-      max-width: 760px;
-      margin: 28px auto;
-      padding: 18px;
-      text-align: center;
+    .page{
+      max-width:760px;
+      margin:18px auto;
+      padding:18px;
+      text-align:center;
     }
 
-    h1 {
-      font-size: 24px;
-      font-weight: 800;
-      margin-bottom: 8px;
+    h1{ font-size:24px; font-weight:800; margin:0 0 6px 0; }
+
+    .link{
+      display:inline-block;
+      color:#2563eb;
+      text-decoration:underline;
+      margin:8px 0 14px;
     }
 
-    .link {
-      display: inline-block;
-      color: #2563eb;
-      text-decoration: underline;
-      font-weight: 600;
-      margin: 12px 0;
-      transition: color 0.2s;
+    /* Game area */
+    #gameContainer{
+      position:relative;
+      width:var(--game-size);
+      height:var(--game-size);
+      margin:20px auto;
+      background:#f0f0f0;
+      border:3px solid #000;
+      overflow:hidden;
+      touch-action:none;
     }
 
-    .link:hover {
-      color: #1e4fc2;
+    .entity{
+      position:absolute;
+      width:20px;
+      height:20px;
+      will-change: transform;
     }
 
-    #gameContainer {
-      position: relative;
-      width: 400px;
-      height: 400px;
-      margin: 30px auto;
-      background: #f0f0f0;
-      border: 3px solid #000;
-      overflow: hidden;
+    #player{ background:blue; left:50px; top:50px; }
+    #killer{ background:red; left:300px; top:300px; }
+    #wall{
+      position:absolute;
+      left:175px;
+      top:100px;
+      width:50px;
+      height:200px;
+      background:#333;
     }
 
-    .player, .killer, .wall {
-      position: absolute;
+    /* Sprint & health UI */
+    .sprint-bar{
+      width:var(--ui-width);
+      height:6px;
+      margin:12px auto 6px;
+      background:#ddd;
+      border:1px solid #000;
+      position:relative;
+    }
+    .sprint-fill{
+      position:absolute; left:0; top:0; height:100%; width:100%;
+      background:#60a5fa; transition:width 0.08s linear;
     }
 
-    .player {
-      width: 20px;
-      height: 20px;
-      background: blue;
-      left: 50px;
-      top: 50px;
+    .bar-container{
+      width:var(--ui-width);
+      height:25px;
+      background:#ddd;
+      border:2px solid #000;
+      margin:6px auto 10px;
+      display:flex;
+      overflow:hidden;
+    }
+    .bar-section{
+      flex:1;
+      background:#4ade80;
+      transition:transform 0.35s;
+      transform:translateY(0%);
     }
 
-    .killer {
-      width: 20px;
-      height: 20px;
-      background: red;
-      left: 300px;
-      top: 300px;
+    /* Controls layout */
+    .controls{
+      width:var(--ui-width);
+      margin:12px auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
     }
 
-    .wall {
-      width: 50px;
-      height: 200px;
-      background: #333;
-      left: 175px;
-      top: 100px;
+    /* Joystick */
+    .joystick {
+      position:relative;
+      width:120px;
+      height:120px;
+      border-radius:999px;
+      background:rgba(0,0,0,0.06);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:2px solid rgba(0,0,0,0.12);
+      touch-action:none;
     }
-
-    .bar-container {
-      width: 400px;
-      height: 25px;
-      background: #ddd;
-      border: 2px solid #000;
-      margin: 10px auto;
-      display: flex;
-      overflow: hidden;
+    .joy-knob{
+      width:56px;
+      height:56px;
+      border-radius:999px;
+      background:#e5e7eb;
+      border:2px solid #000;
+      transform:translate(0,0);
+      transition: background .06s;
+      touch-action:none;
     }
+    .joy-active .joy-knob{ background:#cbd5e1; }
 
-    .bar-section {
-      flex: 1;
-      background: #4ade80;
-      transition: transform 0.3s;
+    /* Sprint button */
+    .sprint-button{
+      width:120px;
+      height:60px;
+      background:#93c5fd;
+      border:2px solid #000;
+      border-radius:8px;
+      font-weight:700;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      touch-action:none;
     }
+    .sprint-button:active{ background:#60a5fa; }
 
-    .sprint-bar {
-      width: 400px;
-      height: 6px;
-      background: #ddd;
-      border: 1px solid #000;
-      margin: 10px auto;
-      overflow: hidden;
-      position: relative;
+    /* position controls bottom-left/right */
+    .controls-wrapper{
+      position:relative;
+      height:120px;
     }
+    .left-controls{ position:absolute; left:0; bottom:0; }
+    .right-controls{ position:absolute; right:0; bottom:0; }
 
-    .sprint-fill {
-      position: absolute;
-      left: 0;
-      top: 0;
-      height: 100%;
-      background: #60a5fa;
-      width: 100%;
-      transition: width 0.2s;
-    }
-
-    .controls {
-      width: 400px;
-      margin: 20px auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .movement-buttons {
-      display: grid;
-      grid-template-columns: repeat(3, 60px);
-      grid-template-rows: repeat(2, 60px);
-      gap: 5px;
-      justify-content: center;
-    }
-
-    .movement-buttons button {
-      width: 60px;
-      height: 60px;
-      font-size: 20px;
-      cursor: pointer;
-      border: 2px solid #000;
-      background: #e5e7eb;
-      border-radius: 6px;
-    }
-
-    .movement-buttons button:active {
-      background: #cbd5e1;
-    }
-
-    .sprint-button {
-      width: 120px;
-      height: 60px;
-      font-weight: 600;
-      font-size: 16px;
-      background: #93c5fd;
-      border: 2px solid #000;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .sprint-button:active {
-      background: #60a5fa;
+    /* Small layout fixes for smaller screens */
+    @media (max-width:440px){
+      :root{ --game-size: 360px; --ui-width: 360px; }
+      .joystick{ width:100px; height:100px; }
+      .joy-knob{ width:48px; height:48px; }
+      .sprint-button{ width:100px; height:56px; }
     }
   </style>
 </head>
@@ -168,126 +171,309 @@
     <h1>Bear Alpha Runner</h1>
     <a class="link" href="/">← Back to Home</a>
 
-    <div id="gameContainer">
-      <div class="player" id="player"></div>
-      <div class="killer" id="killer"></div>
-      <div class="wall" id="wall"></div>
+    <div id="gameContainer" aria-hidden="false">
+      <div id="player" class="entity"></div>
+      <div id="killer" class="entity"></div>
+      <div id="wall"></div>
     </div>
 
-    <div class="sprint-bar">
-      <div class="sprint-fill" id="sprintFill"></div>
+    <div class="sprint-bar" aria-hidden="true">
+      <div id="sprintFill" class="sprint-fill"></div>
     </div>
 
-    <div class="bar-container" id="healthBar">
+    <div class="bar-container" id="healthBar" aria-hidden="true">
       <div class="bar-section"></div>
       <div class="bar-section"></div>
       <div class="bar-section"></div>
       <div class="bar-section"></div>
     </div>
 
-    <div class="controls">
-      <div class="movement-buttons">
-        <div></div><button id="up">↑</button><div></div>
-        <button id="left">←</button><button id="down">↓</button><button id="right">→</button>
+    <div class="controls-wrapper" style="width:var(--ui-width); margin:0 auto;">
+      <div class="left-controls">
+        <div id="joystick" class="joystick" aria-label="Movement joystick" role="application">
+          <div class="joy-knob" id="joyKnob"></div>
+        </div>
       </div>
-      <button class="sprint-button" id="sprint">Sprint</button>
+
+      <div class="right-controls">
+        <div id="sprintBtn" class="sprint-button" role="button" aria-pressed="false">Sprint</div>
+      </div>
     </div>
   </div>
 
   <script>
-    const player = document.getElementById('player');
-    const killer = document.getElementById('killer');
-    const sprintFill = document.getElementById('sprintFill');
+    // Elements
+    const playerEl = document.getElementById('player');
+    const killerEl = document.getElementById('killer');
+    const wallEl = document.getElementById('wall');
+    const sprintFillEl = document.getElementById('sprintFill');
     const barSections = document.querySelectorAll('.bar-section');
 
+    // Positions (in px inside game container)
     let playerX = 50, playerY = 50;
     let killerX = 300, killerY = 300;
+
+    // Game vars
     let health = 4;
-    let sprint = 100;
+    let sprint = 100; // percent
     let sprinting = false;
+    const playerBaseSpeed = 3;   // normal speed
+    const playerSprintSpeed = 5; // when sprinting
+    const killerSpeed = 3.2;     // killer base (slightly faster than player base)
+    const killerMaxStep = 3.2;
+    let lastTime = performance.now();
     let debounce = false;
 
-    const gameArea = document.getElementById('gameContainer');
-    const wall = document.getElementById('wall');
-    const keys = { up: false, down: false, left: false, right: false };
+    // Input state
+    const input = { x: 0, y: 0 }; // -1..1 vector from joystick or keyboard
+    const keys = { up:false, down:false, left:false, right:false };
 
-    function movePlayer() {
-      let speed = sprinting && sprint > 0 ? 5 : 3;
-      if (keys.up) playerY -= speed;
-      if (keys.down) playerY += speed;
-      if (keys.left) playerX -= speed;
-      if (keys.right) playerX += speed;
+    const container = document.getElementById('gameContainer');
+    const containerRect = () => container.getBoundingClientRect();
 
-      playerX = Math.max(0, Math.min(380, playerX));
-      playerY = Math.max(0, Math.min(380, playerY));
-
-      player.style.left = playerX + 'px';
-      player.style.top = playerY + 'px';
+    // Utility: detect rect intersection (all coordinates relative to game area)
+    function rectsIntersect(x1,y1,w1,h1, x2,y2,w2,h2){
+      return !(x1 + w1 <= x2 || x1 >= x2 + w2 || y1 + h1 <= y2 || y1 >= y2 + h2);
     }
 
-    function moveKiller() {
-      const dx = playerX - killerX;
-      const dy = playerY - killerY;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist > 0) {
-        killerX += (dx / dist) * 3.2;
-        killerY += (dy / dist) * 3.2;
+    // Get wall rect relative to container
+    function getWallRect(){
+      return {
+        x: wallEl.offsetLeft,
+        y: wallEl.offsetTop,
+        w: wallEl.offsetWidth,
+        h: wallEl.offsetHeight
+      };
+    }
+
+    // Joystick implementation (static)
+    const joystick = document.getElementById('joystick');
+    const knob = document.getElementById('joyKnob');
+    const maxRadius = (joystick.clientWidth - knob.clientWidth) / 2;
+    let joyCenter = { x: 0, y: 0 };
+    let activePointerId = null;
+
+    function updateJoyCenter(){
+      const r = joystick.getBoundingClientRect();
+      joyCenter = { x: r.left + r.width/2, y: r.top + r.height/2 };
+    }
+    updateJoyCenter();
+    window.addEventListener('resize', updateJoyCenter);
+
+    function setKnobPosition(dx, dy){
+      knob.style.transform = `translate(${dx}px, ${dy}px)`;
+    }
+
+    function resetJoystick(){
+      input.x = 0; input.y = 0;
+      setKnobPosition(0,0);
+      joystick.classList.remove('joy-active');
+      activePointerId = null;
+    }
+
+    function onPointerStart(evt){
+      evt.preventDefault();
+      updateJoyCenter();
+      const isTouch = evt.type.startsWith('touch');
+      const p = isTouch ? evt.touches[0] : evt;
+      activePointerId = isTouch ? p.identifier : 'mouse';
+      joystick.classList.add('joy-active');
+      onPointerMove(evt);
+    }
+
+    function onPointerMove(evt){
+      if(activePointerId === null) return;
+      const isTouch = evt.type.startsWith('touch');
+      let p;
+      if(isTouch){
+        // find our touch
+        for(const t of evt.touches){
+          if(t.identifier === activePointerId) { p = t; break; }
+        }
+        if(!p) return;
+      } else {
+        if(activePointerId !== 'mouse') return;
+        p = evt;
       }
-      killer.style.left = killerX + 'px';
-      killer.style.top = killerY + 'px';
+      const dx = p.clientX - joyCenter.x;
+      const dy = p.clientY - joyCenter.y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      // clamp
+      const clampedDist = Math.min(dist, maxRadius);
+      const angle = Math.atan2(dy, dx);
+      const nx = Math.cos(angle);
+      const ny = Math.sin(angle);
+      // normalized input -1..1
+      input.x = (clampedDist / maxRadius) * nx;
+      input.y = (clampedDist / maxRadius) * ny;
+      // knob pos
+      setKnobPosition(nx * clampedDist, ny * clampedDist);
     }
 
-    function checkCollision(a, b) {
-      const ar = a.getBoundingClientRect();
-      const br = b.getBoundingClientRect();
-      return !(ar.right < br.left || ar.left > br.right || ar.bottom < br.top || ar.top > br.bottom);
+    function onPointerEnd(evt){
+      evt.preventDefault();
+      resetJoystick();
     }
 
-    function gameLoop() {
-      movePlayer();
-      moveKiller();
+    // pointer + touch listeners
+    joystick.addEventListener('mousedown', onPointerStart);
+    window.addEventListener('mousemove', onPointerMove);
+    window.addEventListener('mouseup', onPointerEnd);
 
-      if (checkCollision(player, killer) && !debounce) {
+    joystick.addEventListener('touchstart', onPointerStart, {passive:false});
+    window.addEventListener('touchmove', onPointerMove, {passive:false});
+    window.addEventListener('touchend', onPointerEnd, {passive:false});
+    window.addEventListener('touchcancel', onPointerEnd, {passive:false});
+
+    // Desktop keyboard WASD controls
+    window.addEventListener('keydown', (e) => {
+      if(e.code === 'KeyW') keys.up = true;
+      if(e.code === 'KeyS') keys.down = true;
+      if(e.code === 'KeyA') keys.left = true;
+      if(e.code === 'KeyD') keys.right = true;
+      if(e.key === 'Shift') sprinting = true;
+      // prevent page scroll keys interfering
+      if(['KeyW','KeyA','KeyS','KeyD','ShiftLeft','ShiftRight'].includes(e.code) || e.key === 'Shift'){
+        e.preventDefault();
+      }
+      updateInputFromKeys();
+    }, {passive:false});
+
+    window.addEventListener('keyup', (e) => {
+      if(e.code === 'KeyW') keys.up = false;
+      if(e.code === 'KeyS') keys.down = false;
+      if(e.code === 'KeyA') keys.left = false;
+      if(e.code === 'KeyD') keys.right = false;
+      if(e.key === 'Shift') sprinting = false;
+      updateInputFromKeys();
+    });
+
+    function updateInputFromKeys(){
+      // Only apply keyboard input when joystick is not active
+      if(activePointerId !== null) return;
+      const x = (keys.right?1:0) - (keys.left?1:0);
+      const y = (keys.down?1:0) - (keys.up?1:0);
+      // normalize
+      const mag = Math.sqrt(x*x + y*y) || 1;
+      input.x = x / mag * (mag?1:0);
+      input.y = y / mag * (mag?1:0);
+      // move knob to reflect keyboard (optional: small visual)
+      setKnobPosition(input.x * (maxRadius*0.6), input.y * (maxRadius*0.6));
+    }
+
+    // Sprint button (touch + mouse)
+    const sprintBtn = document.getElementById('sprintBtn');
+    sprintBtn.addEventListener('mousedown', (e) => { sprinting = true; sprintBtn.setAttribute('aria-pressed','true'); });
+    window.addEventListener('mouseup', ()=>{ sprinting = false; sprintBtn.setAttribute('aria-pressed','false'); });
+    sprintBtn.addEventListener('touchstart', (e)=>{ e.preventDefault(); sprinting = true; sprintBtn.setAttribute('aria-pressed','true'); }, {passive:false});
+    sprintBtn.addEventListener('touchend', (e)=>{ e.preventDefault(); sprinting = false; sprintBtn.setAttribute('aria-pressed','false'); }, {passive:false});
+
+    // Movement / physics loop
+    function clampPlayerPosition(){
+      playerX = Math.max(0, Math.min(container.clientWidth - 20, playerX));
+      playerY = Math.max(0, Math.min(container.clientHeight - 20, playerY));
+    }
+
+    function canMoveRect(x,y,w,h){
+      const wall = getWallRect();
+      return !rectsIntersect(x,y,w,h, wall.x, wall.y, wall.w, wall.h);
+    }
+
+    function gameLoop(now){
+      const dt = Math.min(50, now - lastTime); // ms, clamp for stability
+      lastTime = now;
+
+      // apply input vector (joystick or keyboard)
+      let inX = input.x;
+      let inY = input.y;
+      // If small deadzone, ignore jitter
+      const deadzone = 0.12;
+      if(Math.abs(inX) < deadzone) inX = 0;
+      if(Math.abs(inY) < deadzone) inY = 0;
+
+      // compute speed with sprint
+      const isSprinting = sprinting && sprint > 0;
+      const speed = isSprinting ? playerSprintSpeed : playerBaseSpeed;
+      const moveStep = (speed * (dt/16)); // scaled to 60fps ~16ms
+
+      // Normalize direction
+      const mag = Math.sqrt(inX*inX + inY*inY);
+      let dx = 0, dy = 0;
+      if(mag > 0){
+        dx = (inX / mag) * moveStep;
+        dy = (inY / mag) * moveStep;
+      }
+
+      // Attempt move with collision against wall
+      const nextPX = playerX + dx;
+      const nextPY = playerY + dy;
+      const playerSize = 20;
+      if(canMoveRect(nextPX, playerY, playerSize, playerSize)) playerX = nextPX;
+      // separate axis resolution for smoother sliding
+      if(canMoveRect(playerX, nextPY, playerSize, playerSize)) playerY = nextPY;
+
+      clampPlayerPosition();
+
+      // Killer movement: head towards player but do not move into wall
+      const kdx = playerX - killerX;
+      const kdy = playerY - killerY;
+      const kdist = Math.sqrt(kdx*kdx + kdy*kdy);
+      if(kdist > 0.5){
+        const step = killerMaxStep * (dt/16); // scale similarly
+        const kstepX = (kdx / kdist) * step;
+        const kstepY = (kdy / kdist) * step;
+
+        // Try move X then Y with wall collision checks
+        const nextKX = killerX + kstepX;
+        const nextKY = killerY + kstepY;
+        const killerSize = 20;
+        // try both axes individually (simple sliding)
+        if(canMoveRect(nextKX, killerY, killerSize, killerSize)) killerX = nextKX;
+        if(canMoveRect(killerX, nextKY, killerSize, killerSize)) killerY = nextKY;
+        // If both blocked, killer stays (so they won't go through wall)
+      }
+
+      // Update DOM positions
+      playerEl.style.transform = `translate(${playerX}px, ${playerY}px)`;
+      killerEl.style.transform = `translate(${killerX}px, ${killerY}px)`;
+
+      // Collision between player & killer -> damage with debounce
+      const playerRect = { x: playerX, y: playerY, w:20, h:20 };
+      const killerRect = { x: killerX, y: killerY, w:20, h:20 };
+      if(rectsIntersect(playerRect.x, playerRect.y, playerRect.w, playerRect.h,
+                        killerRect.x, killerRect.y, killerRect.w, killerRect.h) && !debounce){
         debounce = true;
-        health--;
-        if (health >= 0) {
+        health = Math.max(0, health - 1);
+        // animate the health section sliding
+        if(health >= 0 && health < barSections.length){
           barSections[health].style.transform = 'translateY(100%)';
         }
-        setTimeout(() => debounce = false, 1000);
+        setTimeout(()=> debounce = false, 1000);
       }
 
-      if (checkCollision(player, wall)) {
-        playerX -= (keys.right - keys.left) * 5;
-        playerY -= (keys.down - keys.up) * 5;
+      // Sprint drain/regeneration (use dt for smoothness)
+      if(sprinting && sprint > 0){
+        sprint = Math.max(0, sprint - (2 * (dt/100))); // 2% per 100ms in previous impl -> scaled
+      } else if(!sprinting && sprint < 100){
+        sprint = Math.min(100, sprint + (1 * (dt/100)));
       }
+      sprintFillEl.style.width = sprint + '%';
 
-      sprintFill.style.width = sprint + '%';
       requestAnimationFrame(gameLoop);
     }
 
-    // Sprint drain/regeneration
-    setInterval(() => {
-      if (sprinting && sprint > 0) sprint -= 2;
-      else if (!sprinting && sprint < 100) sprint += 1;
-    }, 100);
+    // Start loop
+    lastTime = performance.now();
+    requestAnimationFrame(gameLoop);
 
-    // --- Control setup (mobile + desktop) ---
-    const controlButtons = ['up', 'down', 'left', 'right'];
-    controlButtons.forEach(id => {
-      const btn = document.getElementById(id);
-      btn.addEventListener('mousedown', () => keys[id] = true);
-      btn.addEventListener('mouseup', () => keys[id] = false);
-      btn.addEventListener('touchstart', e => { e.preventDefault(); keys[id] = true; });
-      btn.addEventListener('touchend', e => { e.preventDefault(); keys[id] = false; });
-    });
+    // Reset health visuals on load (in case)
+    for(let i=0;i<barSections.length;i++) barSections[i].style.transform = 'translateY(0%)';
 
-    const sprintBtn = document.getElementById('sprint');
-    sprintBtn.addEventListener('mousedown', () => sprinting = true);
-    sprintBtn.addEventListener('mouseup', () => sprinting = false);
-    sprintBtn.addEventListener('touchstart', e => { e.preventDefault(); sprinting = true; });
-    sprintBtn.addEventListener('touchend', e => { e.preventDefault(); sprinting = false; });
+    // Safety: when leaving pointer (like switching apps), reset joystick and sprint
+    window.addEventListener('blur', () => { resetJoystick(); sprinting=false; });
 
-    gameLoop();
+    // Small nicety: clicking the game area focuses controls (prevent accidental text selection)
+    container.addEventListener('touchstart', (e)=> e.preventDefault(), {passive:false});
   </script>
 </body>
 </html>
