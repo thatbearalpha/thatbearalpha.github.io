@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/ico" href="/Bear_chance_icon.ico">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bear Alpha Runner Game</title>
+  <style>
+    html, body {
+      margin: 0;
+      background: #fff;
+      color: #000;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      height: 100%;
+    }
+
+    .page {
+      max-width: 760px;
+      margin: 28px auto;
+      padding: 18px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .link {
+      display: inline-block;
+      color: #2563eb;
+      text-decoration: underline;
+      font-weight: 600;
+      margin: 12px 0;
+      transition: color 0.2s;
+    }
+
+    .link:hover {
+      color: #1e4fc2;
+    }
+
+    /* Game area */
+    #gameContainer {
+      position: relative;
+      width: 400px;
+      height: 400px;
+      margin: 30px auto;
+      background: #f0f0f0;
+      border: 3px solid #000;
+      overflow: hidden;
+    }
+
+    .player, .killer, .wall {
+      position: absolute;
+    }
+
+    .player {
+      width: 20px;
+      height: 20px;
+      background: blue;
+      left: 50px;
+      top: 50px;
+    }
+
+    .killer {
+      width: 20px;
+      height: 20px;
+      background: red;
+      left: 300px;
+      top: 300px;
+    }
+
+    .wall {
+      width: 50px;
+      height: 200px;
+      background: #333;
+      left: 175px;
+      top: 100px;
+    }
+
+    /* Health bar */
+    .bar-container {
+      width: 400px;
+      height: 25px;
+      background: #ddd;
+      border: 2px solid #000;
+      margin: 10px auto;
+      display: flex;
+      overflow: hidden;
+    }
+
+    .bar-section {
+      flex: 1;
+      background: #4ade80;
+      transition: transform 0.3s;
+    }
+
+    /* Sprint bar */
+    .sprint-bar {
+      width: 400px;
+      height: 6px;
+      background: #ddd;
+      border: 1px solid #000;
+      margin: 10px auto;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .sprint-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      background: #60a5fa;
+      width: 100%;
+      transition: width 0.2s;
+    }
+
+    /* Controls */
+    .controls {
+      width: 400px;
+      margin: 20px auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .movement-buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 50px);
+      grid-template-rows: repeat(2, 50px);
+      gap: 5px;
+      justify-content: center;
+    }
+
+    .movement-buttons button {
+      width: 50px;
+      height: 50px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .sprint-button {
+      width: 100px;
+      height: 50px;
+      font-weight: 600;
+      font-size: 14px;
+      background: #93c5fd;
+      border: 2px solid #000;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1>Bear Alpha Runner</h1>
+    <a class="link" href="/">← Back to Home</a>
+
+    <div id="gameContainer">
+      <div class="player" id="player"></div>
+      <div class="killer" id="killer"></div>
+      <div class="wall" id="wall"></div>
+    </div>
+
+    <div class="sprint-bar">
+      <div class="sprint-fill" id="sprintFill"></div>
+    </div>
+
+    <div class="bar-container" id="healthBar">
+      <div class="bar-section"></div>
+      <div class="bar-section"></div>
+      <div class="bar-section"></div>
+      <div class="bar-section"></div>
+    </div>
+
+    <div class="controls">
+      <div class="movement-buttons">
+        <div></div><button id="up">↑</button><div></div>
+        <button id="left">←</button><button id="down">↓</button><button id="right">→</button>
+      </div>
+      <button class="sprint-button" id="sprint">Sprint</button>
+    </div>
+  </div>
+
+  <script>
+    const player = document.getElementById('player');
+    const killer = document.getElementById('killer');
+    const sprintFill = document.getElementById('sprintFill');
+    const barSections = document.querySelectorAll('.bar-section');
+
+    let playerX = 50, playerY = 50;
+    let killerX = 300, killerY = 300;
+    let health = 4;
+    let sprint = 100;
+    let sprinting = false;
+    let debounce = false;
+
+    const gameArea = document.getElementById('gameContainer');
+    const wall = document.getElementById('wall');
+    const keys = { up: false, down: false, left: false, right: false };
+
+    function movePlayer() {
+      let speed = sprinting ? 5 : 3;
+      if (keys.up) playerY -= speed;
+      if (keys.down) playerY += speed;
+      if (keys.left) playerX -= speed;
+      if (keys.right) playerX += speed;
+
+      // Keep within bounds
+      playerX = Math.max(0, Math.min(380, playerX));
+      playerY = Math.max(0, Math.min(380, playerY));
+
+      player.style.left = playerX + 'px';
+      player.style.top = playerY + 'px';
+    }
+
+    function moveKiller() {
+      const dx = playerX - killerX;
+      const dy = playerY - killerY;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist > 0) {
+        killerX += (dx / dist) * 3.2;
+        killerY += (dy / dist) * 3.2;
+      }
+      killer.style.left = killerX + 'px';
+      killer.style.top = killerY + 'px';
+    }
+
+    function checkCollision(a, b) {
+      const ar = a.getBoundingClientRect();
+      const br = b.getBoundingClientRect();
+      return !(ar.right < br.left || ar.left > br.right || ar.bottom < br.top || ar.top > br.bottom);
+    }
+
+    function gameLoop() {
+      movePlayer();
+      moveKiller();
+
+      if (checkCollision(player, killer) && !debounce) {
+        debounce = true;
+        health--;
+        if (health >= 0) {
+          barSections[health].style.transform = 'translateY(100%)';
+        }
+        setTimeout(() => debounce = false, 1000);
+      }
+
+      if (checkCollision(player, wall)) {
+        // Simple bounce back
+        playerX -= (keys.right - keys.left) * 5;
+        playerY -= (keys.down - keys.up) * 5;
+      }
+
+      sprintFill.style.width = sprint + '%';
+      requestAnimationFrame(gameLoop);
+    }
+
+    setInterval(() => {
+      if (sprinting && sprint > 0) sprint -= 2;
+      else if (!sprinting && sprint < 100) sprint += 1;
+    }, 100);
+
+    document.getElementById('up').onmousedown = () => keys.up = true;
+    document.getElementById('down').onmousedown = () => keys.down = true;
+    document.getElementById('left').onmousedown = () => keys.left = true;
+    document.getElementById('right').onmousedown = () => keys.right = true;
+    document.getElementById('sprint').onmousedown = () => sprinting = true;
+
+    document.onmouseup = () => {
+      keys.up = keys.down = keys.left = keys.right = false;
+      sprinting = false;
+    };
+
+    gameLoop();
+  </script>
+</body>
+</html>
