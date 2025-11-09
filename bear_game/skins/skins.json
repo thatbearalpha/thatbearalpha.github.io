@@ -26,5 +26,33 @@
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "Thatbearalpha",
     "image": "/bear_game/skins/assets/Thatbearalpha.png"
+  },
+  {
+    "name": "8-Bit",
+    "price": "100",
+    "rarity": { "text": "Regular", "color": "#a8a8a8", "textColor": "#ffffff" },
+    "credit": "N/A",
+    "image": "/bear_game/skins/assets/8-Bit_idle.png"
+  },
+  {
+    "name": "Bear_Swagger999",
+    "price": "350",
+    "rarity": { "text": "Regular", "color": "#a8a8a8", "textColor": "#ffffff" },
+    "credit": "N/A",
+    "image": "/bear_game/skins/assets/Bear_swagger999_Idle.png"
+  },
+  {
+    "name": "Candleman",
+    "price": "1050",
+    "rarity": { "text": "Regular", "color": "#a8a8a8", "textColor": "#ffffff" },
+    "credit": "windmillboy",
+    "image": "/bear_game/skins/assets/Candleman.png"
+  },
+  {
+    "name": "Eerie Pumpkin",
+    "price": "750",
+    "rarity": { "text": "Halloween", "color": "#ff7003", "textColor": "#ffffff" },
+    "credit": "N/A",
+    "image": "/bear_game/skins/assets/Classic_Pumpkin_New_Idle.png"
   }
 ]
