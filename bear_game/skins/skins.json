@@ -77,7 +77,7 @@
     "image": "/bear_game/skins/assets/Imposter.png"
   },
   {
-    "name": "Morgan Freeman"
+    "name": "Morgan Freeman",
     "price": "N/A",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "N/A",
