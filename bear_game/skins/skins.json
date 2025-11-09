@@ -32,7 +32,7 @@
     "price": "100",
     "rarity": { "text": "Regular", "color": "#a8a8a8", "textColor": "#ffffff" },
     "credit": "N/A",
-    "image": "/bear_game/skins/assets/8-Bit_idle.png"
+    "image": "/bear_game/skins/assets/8-bit_idle.png"
   },
   {
     "name": "Bear_Swagger999",
