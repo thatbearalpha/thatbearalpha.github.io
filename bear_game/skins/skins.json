@@ -161,14 +161,14 @@
     "image": "/bear_game/skins/assets/stocking.png"
   },
   {
-    "name": "Bloxy Cola Bear"
+    "name": "Bloxy Cola Bear",
     "price": "N/A",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "Agtbacon",
     "image": "/bear_game/skins/assets/bloxybear.png"
   },
   {
-    "name": "Balloon Boy"
+    "name": "Balloon Boy",
     "price": "N/A",
     "rarity": { "text": "Dev", "color": "#020b2e", "textColor": "#ffffff" },
     "credit": "N/A",
@@ -217,84 +217,84 @@
     "image": "/bear_game/skins/assets/marker.png"
   },
   {
-    "name": "Neon Whitey"
+    "name": "Neon Whitey",
     "price": "N/A",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "N/A",
     "image": "/bear_game/skins/assets/WhiteyNeon.png"
   },
   {
-    "name": "Broken"
+    "name": "Broken",
     "price": "950",
     "rarity": { "text": "Regular", "color": "#a8a8a8", "textColor": "#ffffff" },
     "credit": "mxthebear",
     "image": "/bear_game/skins/assets/broken.png"
   },
   {
-    "name": "Cinco De Lagoon"
+    "name": "Cinco De Lagoon",
     "price": "N/A",
     "rarity": { "text": "Secret", "color": "#8d16f5", "textColor": "#ffffff" },
     "credit": "Sang Woo / NOT_Sang Woo",
     "image": "/bear_game/skins/assets/CincoLagoon.png"
   },
   {
-    "name": "Bob [broken]"
+    "name": "Bob [broken]",
     "price": "N/A",
     "rarity": { "text": "Dev", "color": "#020b2e", "textColor": "#ffffff" },
     "credit": "N/A",
     "image": "/bear_game/skins/assets/HDBobimage.png"
   },
   {
-    "name": "Red Robin"
+    "name": "Red Robin",
     "price": "N/A",
     "rarity": { "text": "Secret", "color": "#8d16f5", "textColor": "#ffffff" },
     "credit": "N/A",
     "image": "/bear_game/skins/assets/Red_robin_idle.png"
   },
   {
-    "name": "Cinco De Boyo"
+    "name": "Cinco De Boyo",
     "price": "N/A",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "N/A",
     "image": "/bear_game/skins/assets/cincoboyo.png"
   },
   {
-    "name": "Blizzard Deluxe Edition"
+    "name": "Blizzard Deluxe Edition",
     "price": "N/A",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "scpbaconjesus2012",
     "image": "/bear_game/skins/assets/DelBlizzard.png"
   },
   {
-    "name": "Dithered Bear [giftbox]"
+    "name": "Dithered Bear [giftbox]",
     "price": "N/A",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "N/A",
     "image": "/bear_game/skins/assets/Ditheredidle.webp"
   },
   {
-    "name": "Giftbox2 [Coming soon]"
+    "name": "Giftbox2 [Coming soon]",
     "price": "N/A",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "N/A",
     "image": "/bear_game/skins/assets/Placeholder.png"
   },
   {
-    "name": "Cinco De Whitey"
+    "name": "Cinco De Whitey",
     "price": "N/A",
     "rarity": { "text": "Secret", "color": "#8d16f5", "textColor": "#ffffff" },
     "credit": "Sang Woo / NOT_Sang Woo",
     "image": "/bear_game/skins/assets/Cinco_De_Whitey.png"
   },
   {
-    "name": "Beartube"
+    "name": "Beartube",
     "price": "N/A",
     "rarity": { "text": "Special", "color": "#db12b3", "textColor": "#ffffff" },
     "credit": "Sang Woo / NOT_Sang Woo",
     "image": "/bear_game/skins/assets/beartube.webp"
   },
   {
-    "name": "R_3tr_0"
+    "name": "R_3tr_0",
     "price": "N/A",
     "rarity": { "text": "Secret", "color": "#8d16f5", "textColor": "#ffffff" },
     "credit": "N/A",
@@ -308,49 +308,49 @@
     "image": "/bear_game/skins/assets/WitchLord.png"
   },
   {
-    "name": "Puffle Stack"
+    "name": "Puffle Stack",
     "price": "N/A",
     "rarity": { "text": "Dev", "color": "#020b2e", "textColor": "#ffffff" },
     "credit": "N/A",
     "image": "/bear_game/skins/assets/stack.png"
   },
   {
-    "name": "Deleted Atrocity"
+    "name": "Deleted Atrocity",
     "price": "N/A",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "Lovebearalpha",
     "image": "/bear_game/skins/assets/deleted_atrocity.png"
   },
   {
-    "name": "Molten Choco Bear"
+    "name": "Molten Choco Bear",
     "price": "N/A",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "N/A",
     "image": "/bear_game/skins/assets/Molten_Choco_Bear_Idle.png"
   },
   {
-    "name": "Spider Vector"
+    "name": "Spider Vector",
     "price": "N/A",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "@AdidasKingYT / adumnob",
     "image": "/bear_game/skins/assets/SpiderVector.png"
   },
   {
-    "name": "Pixel Lord"
+    "name": "Pixel Lord",
     "price": "N/A",
     "rarity": { "text": "Regular", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "Thatbearalpha",
     "image": "/bear_game/skins/assets/PixelLord.png"
   },
   {
-    "name": "The Alien From Mars"
+    "name": "The Alien From Mars",
     "price": "N/A",
     "rarity": { "text": "Regular", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "Thatbearalpha",
     "image": "/bear_game/skins/assets/AlienFromMars.png"
   },
   {
-    "name": "Unfinished"
+    "name": "Unfinished",
     "price": "N/A",
     "rarity": { "text": "!", "color": "#d90902", "textColor": "#ffffff" },
     "credit": "This section is not finished and will be finished soon",
