@@ -345,7 +345,7 @@
   {
     "name": "The Alien From Mars",
     "price": "550",
-    "rarity": { "text": "Regular", "color": "#0080ff", "textColor": "#ffffff" },
+    "rarity": { "text": "Regular", "color": "#a8a8a8", "textColor": "#ffffff" },
     "credit": "Thatbearalpha",
     "image": "/bear_game/skins/assets/AlienFromMars.png"
   },
