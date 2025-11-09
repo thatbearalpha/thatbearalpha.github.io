@@ -238,7 +238,7 @@
     "image": "/bear_game/skins/assets/CincoLagoon.png"
   },
   {
-    "name": "Bob [broken]",
+    "name": "Bob (broken)",
     "price": "N/A",
     "rarity": { "text": "Dev", "color": "#020b2e", "textColor": "#ffffff" },
     "credit": "N/A",
@@ -266,14 +266,14 @@
     "image": "/bear_game/skins/assets/DelBlizzard.png"
   },
   {
-    "name": "Dithered Bear [giftbox]",
+    "name": "Dithered Bear (giftbox)",
     "price": "N/A",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "N/A",
     "image": "/bear_game/skins/assets/Ditheredidle.webp"
   },
   {
-    "name": "Giftbox2 [Coming soon]",
+    "name": "Giftbox2 (Coming soon)",
     "price": "N/A",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "N/A",
