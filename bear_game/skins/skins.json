@@ -235,14 +235,14 @@
     "price": "",
     "rarity": { "text": "Secret", "color": "#8d16f5", "textColor": "#ffffff" },
     "credit": "Sang Woo / NOT_Sang Woo",
-    "image": "/bear_game/skins/assets/CincoLagoon.png"
+    "image": "/bear_game/skins/assets/CincoLagoon.webp"
   },
   {
     "name": "Bob (broken)",
     "price": "",
     "rarity": { "text": "Dev", "color": "#020b2e", "textColor": "#ffffff" },
     "credit": "",
-    "image": "/bear_game/skins/assets/HDBobimage.png"
+    "image": "/bear_game/skins/assets/Hdbobimage.png"
   },
   {
     "name": "Red Robin",
@@ -305,7 +305,7 @@
     "price": "850",
     "rarity": { "text": "Halloween", "color": "#ff7003", "textColor": "#ffffff" },
     "credit": "@sjsvjsqlwbwb0",
-    "image": "/bear_game/skins/assets/WitchLord.png"
+    "image": "/bear_game/skins/assets/WitchLord.webp"
   },
   {
     "name": "Puffle Stack",
@@ -326,7 +326,7 @@
     "price": "",
     "rarity": { "text": "Exclusive", "color": "#0080ff", "textColor": "#ffffff" },
     "credit": "",
-    "image": "/bear_game/skins/assets/Molten_Choco_Bear_Idle.png"
+    "image": "/bear_game/skins/assets/Molten_Choco_Bear.png"
   },
   {
     "name": "Spider Vector",
