@@ -350,10 +350,10 @@
     "image": "/bear_game/skins/assets/AlienFromMars.png"
   },
   {
-    "name": "Unfinished",
+    "name": "Unfinished Section",
     "price": "",
     "rarity": { "text": "!", "color": "#d90902", "textColor": "#ffffff" },
-    "credit": "This section is not finished and will be finished soon",
+    "credit": "",
     "image": "/bear_game/skins/assets/Placeholder.png"
   }
 ]
