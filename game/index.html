@@ -12,6 +12,7 @@
       color: #000;
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       height: 100%;
+      touch-action: none; /* Prevents scrolling while using controls */
     }
 
     .page {
@@ -40,7 +41,6 @@
       color: #1e4fc2;
     }
 
-    /* Game area */
     #gameContainer {
       position: relative;
       width: 400px;
@@ -79,7 +79,6 @@
       top: 100px;
     }
 
-    /* Health bar */
     .bar-container {
       width: 400px;
       height: 25px;
@@ -96,7 +95,6 @@
       transition: transform 0.3s;
     }
 
-    /* Sprint bar */
     .sprint-bar {
       width: 400px;
       height: 6px;
@@ -117,38 +115,51 @@
       transition: width 0.2s;
     }
 
-    /* Controls */
     .controls {
       width: 400px;
       margin: 20px auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .movement-buttons {
       display: grid;
-      grid-template-columns: repeat(3, 50px);
-      grid-template-rows: repeat(2, 50px);
+      grid-template-columns: repeat(3, 60px);
+      grid-template-rows: repeat(2, 60px);
       gap: 5px;
       justify-content: center;
     }
 
     .movement-buttons button {
-      width: 50px;
-      height: 50px;
-      font-size: 16px;
+      width: 60px;
+      height: 60px;
+      font-size: 20px;
       cursor: pointer;
+      border: 2px solid #000;
+      background: #e5e7eb;
+      border-radius: 6px;
+    }
+
+    .movement-buttons button:active {
+      background: #cbd5e1;
     }
 
     .sprint-button {
-      width: 100px;
-      height: 50px;
+      width: 120px;
+      height: 60px;
       font-weight: 600;
-      font-size: 14px;
+      font-size: 16px;
       background: #93c5fd;
       border: 2px solid #000;
+      border-radius: 6px;
       cursor: pointer;
+    }
+
+    .sprint-button:active {
+      background: #60a5fa;
     }
   </style>
 </head>
@@ -201,13 +212,12 @@
     const keys = { up: false, down: false, left: false, right: false };
 
     function movePlayer() {
-      let speed = sprinting ? 5 : 3;
+      let speed = sprinting && sprint > 0 ? 5 : 3;
       if (keys.up) playerY -= speed;
       if (keys.down) playerY += speed;
       if (keys.left) playerX -= speed;
       if (keys.right) playerX += speed;
 
-      // Keep within bounds
       playerX = Math.max(0, Math.min(380, playerX));
       playerY = Math.max(0, Math.min(380, playerY));
 
@@ -218,7 +228,7 @@
     function moveKiller() {
       const dx = playerX - killerX;
       const dy = playerY - killerY;
-      const dist = Math.sqrt(dx*dx + dy*dy);
+      const dist = Math.sqrt(dx * dx + dy * dy);
       if (dist > 0) {
         killerX += (dx / dist) * 3.2;
         killerY += (dy / dist) * 3.2;
@@ -247,7 +257,6 @@
       }
 
       if (checkCollision(player, wall)) {
-        // Simple bounce back
         playerX -= (keys.right - keys.left) * 5;
         playerY -= (keys.down - keys.up) * 5;
       }
@@ -256,21 +265,27 @@
       requestAnimationFrame(gameLoop);
     }
 
+    // Sprint drain/regeneration
     setInterval(() => {
       if (sprinting && sprint > 0) sprint -= 2;
       else if (!sprinting && sprint < 100) sprint += 1;
     }, 100);
 
-    document.getElementById('up').onmousedown = () => keys.up = true;
-    document.getElementById('down').onmousedown = () => keys.down = true;
-    document.getElementById('left').onmousedown = () => keys.left = true;
-    document.getElementById('right').onmousedown = () => keys.right = true;
-    document.getElementById('sprint').onmousedown = () => sprinting = true;
+    // --- Control setup (mobile + desktop) ---
+    const controlButtons = ['up', 'down', 'left', 'right'];
+    controlButtons.forEach(id => {
+      const btn = document.getElementById(id);
+      btn.addEventListener('mousedown', () => keys[id] = true);
+      btn.addEventListener('mouseup', () => keys[id] = false);
+      btn.addEventListener('touchstart', e => { e.preventDefault(); keys[id] = true; });
+      btn.addEventListener('touchend', e => { e.preventDefault(); keys[id] = false; });
+    });
 
-    document.onmouseup = () => {
-      keys.up = keys.down = keys.left = keys.right = false;
-      sprinting = false;
-    };
+    const sprintBtn = document.getElementById('sprint');
+    sprintBtn.addEventListener('mousedown', () => sprinting = true);
+    sprintBtn.addEventListener('mouseup', () => sprinting = false);
+    sprintBtn.addEventListener('touchstart', e => { e.preventDefault(); sprinting = true; });
+    sprintBtn.addEventListener('touchend', e => { e.preventDefault(); sprinting = false; });
 
     gameLoop();
   </script>
