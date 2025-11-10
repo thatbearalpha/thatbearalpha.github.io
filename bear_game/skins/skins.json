@@ -1,7 +1,7 @@
 [
   {
     "name": "Bear",
-    "price": 0,
+    "price": "",
     "rarity": { "text": "Default", "color": "#8d8f8e", "textColor": "#000000" },
     "credit": "",
     "image": "/bear_game/skins/assets/BearIdle.png"
