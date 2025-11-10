@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/ico" href="/Bear_chance_icon.ico">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Skins - Bear Alpha Game</title>
+  <style>
+    :root{
+      --max-width: 900px;
+      --accent: #2563eb;
+      --bg: #fff;
+      --text: #111;
+      --muted: #444;
+      --card-radius: 10px;
+    }
+    html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial;}
+    .page{max-width:var(--max-width);margin:28px auto;padding:18px;}
+    header{text-align:center;margin-bottom:12px;}
+    header h1{margin:0;font-size:24px;font-weight:800;}
+    p.lead{color:var(--muted);text-align:center;max-width:800px;margin:12px auto 24px;}
+    .links{text-align:center;margin-bottom:18px;}
+    .links a{color:var(--accent);text-decoration:underline;font-weight:600;margin:6px;display:inline-block;}
+    /* list */
+    .list{display:flex;flex-direction:column;gap:12px;}
+    .card{display:flex;gap:14px;align-items:center;padding:12px;border-radius:var(--card-radius);border:1px solid #eee;background:#fbfbfb;}
+    .thumb{flex:0 0 96px;height:96px;overflow:hidden;border-radius:8px;background:#eee;display:flex;align-items:center;justify-content:center;}
+    .thumb img{max-width:100%;max-height:100%;display:block;}
+    .meta{flex:1;min-width:0;}
+    .row{display:flex;justify-content:space-between;align-items:center;gap:12px;}
+    .name{font-weight:700;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .price{font-weight:600;color:var(--muted);}
+    .rarity{font-weight:700;padding:6px 8px;border-radius:999px;font-size:13px;}
+    .credit{color:var(--muted);font-size:13px;margin-top:6px;}
+    /* responsive */
+    @media (max-width:520px){
+      .card{flex-direction:row;gap:10px;}
+      .thumb{flex:0 0 72px;height:72px;}
+      .name{font-size:15px;}
+    }
+    /* nice scroll area */
+    .list-wrap{max-height:65vh;overflow:auto;padding-right:6px;}
+    /* empty state */
+    .empty{padding:30px;text-align:center;color:var(--muted);}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1>Skins</h1>
+    </header>
+
+    <p class="lead">This page lists all the skins for Bear Alpha Game, with credits and rarities.
+
+    <div class="links">
+      <a href="/bear_game">← Back to Bear Alpha Game</a>
+      <a href="/">← Home</a>
+    </div>
+
+    <div class="list-wrap" id="list-wrap">
+      <div id="list" class="list" aria-live="polite"></div>
+    </div>
+
+    <template id="card-template">
+      <article class="card">
+        <div class="thumb"><img loading="lazy" alt=""></div>
+        <div class="meta">
+          <div class="row">
+            <div class="name" title=""></div>
+            <div>
+              <div class="price"></div>
+              <div class="rarity" style=""></div>
+            </div>
+          </div>
+          <div class="credit"></div>
+        </div>
+      </article>
+    </template>
+  </div>
+
+  <script>
+    // path to your JSON file (same folder)
+    const DATA_PATH = './skins.json';
+
+    // Helper: create element from template and fill fields
+    function renderCard(item){
+      const tpl = document.getElementById('card-template');
+      const node = tpl.content.cloneNode(true);
+      const card = node.querySelector('.card');
+      const img = node.querySelector('.thumb img');
+      const nameEl = node.querySelector('.name');
+      const priceEl = node.querySelector('.price');
+      const rarityEl = node.querySelector('.rarity');
+      const creditEl = node.querySelector('.credit');
+
+      // Image: either relative path or absolute URL
+      img.src = item.image || '';
+      img.alt = item.name + ' thumbnail';
+
+      // Text fields
+      nameEl.textContent = item.name || 'Unnamed Skin';
+      nameEl.title = item.name || '';
+
+      // show price + " Quidz" only when price is not an empty string/null/undefined
+      if (item.price === "" || item.price === null || item.price === undefined) {
+        priceEl.textContent = '';
+      } else {
+        priceEl.textContent = String(item.price) + ' Quidz';
+      }
+
+
+      // Rarity can be a string, or an object { text, color }
+      if(typeof item.rarity === 'string'){
+        rarityEl.textContent = item.rarity;
+        // fallback color by text
+        rarityEl.style.background = getColorForRarity(item.rarity);
+        rarityEl.style.color = getContrastColor(rarityEl.style.background);
+      } else if (typeof item.rarity === 'object' && item.rarity !== null){
+        rarityEl.textContent = item.rarity.text || '';
+        rarityEl.style.background = item.rarity.color || getColorForRarity(item.rarity.text || '');
+        rarityEl.style.color = item.rarity.textColor || getContrastColor(rarityEl.style.background);
+      } else {
+        rarityEl.style.display = 'none';
+      }
+
+      creditEl.textContent = item.credit ? ('Credit: ' + item.credit) : '';
+
+      return node;
+    }
+
+    // small default color map, change as you like
+    function getColorForRarity(r){
+      if(!r) return '#ddd';
+      const key = r.toLowerCase();
+      if(key.includes('common')) return '#e5e7eb';   // light grey
+      if(key.includes('uncommon')) return '#86efac'; // greenish
+      if(key.includes('rare')) return '#93c5fd';     // blue
+      if(key.includes('epic')) return '#c084fc';     // purple
+      if(key.includes('legendary')) return '#fbbf24'; // gold
+      return '#ddd';
+    }
+
+    // compute readable text color based on background hex (simple)
+    function getContrastColor(bg){
+      try{
+        // remove # if present
+        const c = bg.replace('#','');
+        const r = parseInt(c.substr(0,2),16);
+        const g = parseInt(c.substr(2,2),16);
+        const b = parseInt(c.substr(4,2),16);
+        // luminance
+        const lum = 0.2126*r + 0.7152*g + 0.0722*b;
+        return lum > 150 ? '#111' : '#fff';
+      }catch(e){
+        return '#111';
+      }
+    }
+
+    async function loadData(){
+      const listEl = document.getElementById('list');
+      const wrap = document.getElementById('list-wrap');
+      listEl.innerHTML = '';
+      try{
+        const res = await fetch(DATA_PATH, {cache: "no-store"});
+        if(!res.ok) throw new Error('No skins.json found');
+        const data = await res.json();
+        if(!Array.isArray(data) || data.length === 0){
+          listEl.innerHTML = '<div class="empty">No skins found. Edit <code>skins.json</code> to add items.</div>';
+          return;
+        }
+
+        // Optional: sort by some field or preserve order as in JSON
+        // data.sort((a,b)=> (a.name||'').localeCompare(b.name||''));
+
+        for(const item of data){
+          const node = renderCard(item);
+          listEl.appendChild(node);
+        }
+      } catch(err){
+        listEl.innerHTML = '<div class="empty">Unable to load skins.json. ' + (err.message||'') + '</div>';
+        console.error(err);
+      }
+    }
+
+    // run on load
+    loadData();
+  </script>
+</body>
+</html>
