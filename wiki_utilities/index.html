@@ -5,6 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BEAR Wiki Utilities</title>
+
   <style>
     html, body {
       margin: 0;
@@ -44,19 +45,58 @@
     }
   </style>
 </head>
+
 <body>
   <div class="page">
     <h1>BEAR Wiki Utilities</h1>
     <p>Quick access to the Roblox BEAR Wiki:</p>
 
+    <!-- Random ANY page -->
     <a class="link" href="https://roblox-bear.fandom.com/wiki/Special:Random" target="_blank">
       Random Wiki Page →
     </a>
+
+    <!-- ⭐ Added BEAR (Alpha) Search Button -->
+    <a id="alpha-random" class="link" href="#">
+      Random BEAR (Alpha) Page →
+    </a>
+
     <a class="link" href="https://roblox-bear.fandom.com/wiki/Roblox_BEAR_Wiki" target="_blank">
       Wiki Home →
     </a>
 
     <p><a href="/" class="link">← Back to Home</a></p>
   </div>
+
+  <!-- ⭐ Script for filtering Alpha pages -->
+  <script>
+    document.getElementById("alpha-random").addEventListener("click", async (e) => {
+      e.preventDefault();
+
+      const wiki = "https://roblox-bear.fandom.com";
+      const api =
+        wiki +
+        "/api.php?action=query&list=search&srsearch=%22Bear%20(Alpha)%22&srlimit=50&format=json&origin=*";
+
+      try {
+        const res = await fetch(api);
+        const data = await res.json();
+        const results = data.query?.search || [];
+
+        if (!results.length) {
+          window.open(wiki + "/wiki/Special:Random", "_blank");
+          return;
+        }
+
+        const page = results[Math.floor(Math.random() * results.length)];
+        const urlTitle = encodeURIComponent(page.title.replace(/ /g, "_"));
+        window.open(`${wiki}/wiki/${urlTitle}`, "_blank");
+        
+      } catch {
+        // Fallback
+        window.open("https://roblox-bear.fandom.com/wiki/Special:Random", "_blank");
+      }
+    });
+  </script>
 </body>
 </html>
