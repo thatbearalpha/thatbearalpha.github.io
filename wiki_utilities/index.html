@@ -68,35 +68,122 @@
     <p><a href="/" class="link">← Back to Home</a></p>
   </div>
 
-  <!-- ⭐ Script for filtering Alpha pages -->
+  <!-- Full robust script: title search + exact footer phrase + body phrase + session de-dup -->
   <script>
-    document.getElementById("alpha-random").addEventListener("click", async (e) => {
-      e.preventDefault();
-
+    (function () {
       const wiki = "https://roblox-bear.fandom.com";
-      const api =
-        wiki +
-        "/api.php?action=query&list=search&srsearch=%22Bear%20(Alpha)%22&srlimit=50&format=json&origin=*";
+      const maxLimit = 200; // usually plenty; API may reduce if necessary
 
-      try {
-        const res = await fetch(api);
-        const data = await res.json();
-        const results = data.query?.search || [];
+      // Build three API endpoints:
+      // 1) title includes (Alpha)
+      // 2) exact footer "Reference/s: Bear (Alpha)"
+      // 3) body includes "Bear (Alpha)" (broader fallback)
+      const apiTitle = `${wiki}/api.php?action=query&list=search&srsearch=${encodeURIComponent('intitle:(Alpha)')}&srlimit=${maxLimit}&format=json&origin=*`;
+      const apiFooter = `${wiki}/api.php?action=query&list=search&srsearch=${encodeURIComponent('"Reference/s: Bear (Alpha)"')}&srlimit=${maxLimit}&format=json&origin=*`;
+      const apiBody   = `${wiki}/api.php?action=query&list=search&srsearch=${encodeURIComponent('"Bear (Alpha)"')}&srlimit=${maxLimit}&format=json&origin=*`;
 
-        if (!results.length) {
-          window.open(wiki + "/wiki/Special:Random", "_blank");
-          return;
-        }
+      const storageKey = "bearAlphaSeen_v1"; // sessionStorage key for seen titles
 
-        const page = results[Math.floor(Math.random() * results.length)];
-        const urlTitle = encodeURIComponent(page.title.replace(/ /g, "_"));
-        window.open(`${wiki}/wiki/${urlTitle}`, "_blank");
-        
-      } catch {
-        // Fallback
-        window.open("https://roblox-bear.fandom.com/wiki/Special:Random", "_blank");
+      function saveSeen(seenArr) {
+        try { sessionStorage.setItem(storageKey, JSON.stringify(seenArr)); } catch (e) { /* ignore */ }
       }
-    });
+      function loadSeen() {
+        try {
+          return JSON.parse(sessionStorage.getItem(storageKey) || "[]");
+        } catch (e) {
+          return [];
+        }
+      }
+
+      async function fetchJson(url) {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("Network response not ok");
+        return res.json();
+      }
+
+      function mergeAndDedupe(...lists) {
+        const map = new Map();
+        for (const list of lists) {
+          for (const p of list) {
+            if (p && p.title) map.set(p.title, p);
+          }
+        }
+        return Array.from(map.values());
+      }
+
+      async function getAlphaPages() {
+        // Parallel fetch; tolerate individual failures
+        const promises = [
+          fetchJson(apiTitle).catch(() => null),
+          fetchJson(apiFooter).catch(() => null),
+          fetchJson(apiBody).catch(() => null),
+        ];
+
+        const [resTitle, resFooter, resBody] = await Promise.all(promises);
+
+        const listA = resTitle?.query?.search || [];
+        const listB = resFooter?.query?.search || [];
+        const listC = resBody?.query?.search || [];
+
+        // Merge and dedupe by title
+        return mergeAndDedupe(listA, listB, listC);
+      }
+
+      function pickRandom(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+      }
+
+      async function openRandomAlpha() {
+        try {
+          const pages = await getAlphaPages();
+
+          if (!pages.length) {
+            // If API returned nothing, fallback to Special:Random
+            window.open(`${wiki}/wiki/Special:Random`, "_blank");
+            return;
+          }
+
+          // Use sessionStorage to avoid repeats during this browser session:
+          const seen = loadSeen(); // array of titles
+          const allTitles = pages.map(p => p.title);
+
+          // candidates = pages whose title is not in seen
+          let candidates = (pages.filter(p => !seen.includes(p.title)));
+
+          // If we've already shown all pages, reset seen (start over)
+          if (!candidates.length) {
+            saveSeen([]); // clear seen
+            candidates = pages.slice();
+          }
+
+          const picked = pickRandom(candidates);
+          if (!picked || !picked.title) {
+            window.open(`${wiki}/wiki/Special:Random`, "_blank");
+            return;
+          }
+
+          // Mark as seen
+          seen.push(picked.title);
+          // keep seen size reasonable (not necessary but prevents huge growth)
+          if (seen.length > 1000) seen.splice(0, seen.length - 1000);
+          saveSeen(seen);
+
+          // Open the picked page
+          const urlTitle = encodeURIComponent(picked.title.replace(/ /g, "_"));
+          window.open(`${wiki}/wiki/${urlTitle}`, "_blank");
+
+        } catch (err) {
+          // if anything fails, fallback to Special:Random
+          console.error("Random Alpha failed:", err);
+          window.open(`${wiki}/wiki/Special:Random`, "_blank");
+        }
+      }
+
+      document.getElementById("alpha-random").addEventListener("click", (e) => {
+        e.preventDefault();
+        openRandomAlpha();
+      });
+    })();
   </script>
 </body>
 </html>
