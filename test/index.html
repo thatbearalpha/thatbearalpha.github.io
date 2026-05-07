@@ -1,143 +1,148 @@
 <!doctype html>
-<html>
-
+<html lang="en">
 <head>
-
-  <title>Thatbearalpha's site</title>
-
   <link rel="icon" type="image/ico" href="/Bear_chance_icon.ico">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BEAR Wiki Utilities</title>
 
   <link rel="stylesheet" href="https://unpkg.com/98.css">
 
   <style>
-
     body {
-
       background: teal;
-
       padding: 30px;
-
       font-family: "MS Sans Serif";
-
     }
-
     .window {
-
       width: 500px;
-
       margin: auto;
-
     }
-
     .center {
-
       text-align: center;
-
     }
-
-    img {
-
-      margin-top: 10px;
-
-      margin-bottom: 10px;
-
-    }
-
     .links a {
-
       display: block;
-
       margin: 8px 0;
-
     }
-
   </style>
-
 </head>
 
 <body>
-
   <div class="window">
-
     <div class="title-bar">
-
       <div class="title-bar-text">
-
-        Thatbearalpha's site
-
+        BEAR Wiki Utilities
       </div>
-
       <div class="title-bar-controls">
-
         <button aria-label="Minimize"></button>
-
         <button aria-label="Maximize"></button>
-
         <button aria-label="Close"></button>
-
       </div>
-
     </div>
-
     <div class="window-body">
-
-      <div class="center">
-
-        <h3>Welcome!</h3>
-
-        <img
-          src="https://i.postimg.cc/QtNqTGY5/1000002812-removebg-preview.png"
-          width="250"
-        >
-
-        <p>
-
-          Welcome to my site!
-          <br>
-          Here you can find resources and utilities
-
-        </p>
-
-      </div>
+      <p>Quick access to the Roblox BEAR Wiki:</p>
 
       <fieldset>
-
-        <legend>Navigation</legend>
-
+        <legend>Wiki Links</legend>
         <div class="links">
-
-          <a href="/profiles">
-            Profiles
+          <a href="https://roblox-bear.fandom.com/wiki/Special:Random" target="_blank">
+            Random Wiki Page →
           </a>
-
-          <a href="/wiki_utilities">
-            BEAR Wiki Utilities
+          <a id="alpha-random" href="#">
+            Random BEAR (Alpha) Page →
           </a>
-
-          <a href="/bear_game">
-            Bear Alpha Game Documentation
+          <a href="https://roblox-bear.fandom.com/wiki/Roblox_BEAR_Wiki" target="_blank">
+            Wiki Home →
           </a>
-
-          <a href="/discord">
-            Discord Server
-          </a>
-
         </div>
-
       </fieldset>
 
       <br>
 
-      <marquee>
-
-        Under Construction
-
-      </marquee>
-
+      <div class="center">
+        <a href="/"><button>← Back to Home</button></a>
+      </div>
     </div>
-
   </div>
 
-</body>
+  <script>
+    (function () {
+      const wiki = "https://roblox-bear.fandom.com";
+      const maxLimit = 200;
 
+      const apiTitle  = `${wiki}/api.php?action=query&list=search&srsearch=${encodeURIComponent('intitle:(Alpha)')}&srlimit=${maxLimit}&format=json&origin=*`;
+      const apiFooter = `${wiki}/api.php?action=query&list=search&srsearch=${encodeURIComponent('"Reference/s: Bear (Alpha)"')}&srlimit=${maxLimit}&format=json&origin=*`;
+      const apiBody   = `${wiki}/api.php?action=query&list=search&srsearch=${encodeURIComponent('"Bear (Alpha)"')}&srlimit=${maxLimit}&format=json&origin=*`;
+
+      const storageKey = "bearAlphaSeen_v1";
+
+      function saveSeen(seenArr) {
+        try { sessionStorage.setItem(storageKey, JSON.stringify(seenArr)); } catch (e) {}
+      }
+      function loadSeen() {
+        try { return JSON.parse(sessionStorage.getItem(storageKey) || "[]"); } catch (e) { return []; }
+      }
+
+      async function fetchJson(url) {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("Network response not ok");
+        return res.json();
+      }
+
+      function mergeAndDedupe(...lists) {
+        const map = new Map();
+        for (const list of lists)
+          for (const p of list)
+            if (p && p.title) map.set(p.title, p);
+        return Array.from(map.values());
+      }
+
+      async function getAlphaPages() {
+        const [resTitle, resFooter, resBody] = await Promise.all([
+          fetchJson(apiTitle).catch(() => null),
+          fetchJson(apiFooter).catch(() => null),
+          fetchJson(apiBody).catch(() => null),
+        ]);
+        return mergeAndDedupe(
+          resTitle?.query?.search  || [],
+          resFooter?.query?.search || [],
+          resBody?.query?.search   || []
+        );
+      }
+
+      function pickRandom(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+      }
+
+      async function openRandomAlpha() {
+        try {
+          const pages = await getAlphaPages();
+          if (!pages.length) { window.open(`${wiki}/wiki/Special:Random`, "_blank"); return; }
+
+          const seen = loadSeen();
+          let candidates = pages.filter(p => !seen.includes(p.title));
+          if (!candidates.length) { saveSeen([]); candidates = pages.slice(); }
+
+          const picked = pickRandom(candidates);
+          if (!picked?.title) { window.open(`${wiki}/wiki/Special:Random`, "_blank"); return; }
+
+          seen.push(picked.title);
+          if (seen.length > 1000) seen.splice(0, seen.length - 1000);
+          saveSeen(seen);
+
+          window.open(`${wiki}/wiki/${encodeURIComponent(picked.title.replace(/ /g, "_"))}`, "_blank");
+        } catch (err) {
+          console.error("Random Alpha failed:", err);
+          window.open(`${wiki}/wiki/Special:Random`, "_blank");
+        }
+      }
+
+      document.getElementById("alpha-random").addEventListener("click", (e) => {
+        e.preventDefault();
+        openRandomAlpha();
+      });
+    })();
+  </script>
+</body>
 </html>
