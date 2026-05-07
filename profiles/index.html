@@ -1,65 +1,225 @@
 <!doctype html>
-<html lang="en">
+<html>
+
 <head>
-  <link rel="icon" type="image/ico" href="/Bear_chance_icon.ico">
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>Profiles</title>
+
+  <link rel="icon" type="image/ico" href="/Bear_chance_icon.ico">
+
+  <link rel="stylesheet" href="https://unpkg.com/98.css">
+
   <style>
-    html, body {
-      margin: 0;
-      background: #fff;
-      color: #000;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+    body {
+
+      background: teal;
+
+      padding: 30px;
+
+      font-family: "MS Sans Serif";
+
     }
 
-    .page {
-      max-width: 760px;
-      margin: 28px auto;
-      padding: 18px;
+    .window {
+
+      width: 550px;
+
+      margin: auto;
+
+    }
+
+    .scrollbox {
+
+      height: 100px;
+
+      overflow-y: scroll;
+
+      border: 2px inset gray;
+
+      background: white;
+
+      padding: 6px;
+
+    }
+
+    .profile {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      padding: 2px;
+
+      border-bottom: 1px solid gray;
+
+    }
+
+    .profile img {
+
+      width: 20px;
+
+      height: 20;
+
+    }
+
+    .profile-name {
+
+      font-weight: bold;
+
+      margin-bottom: 2px;
+
+    }
+
+    .bottom {
+
+      margin-top: 10px;
+
       text-align: center;
+
     }
 
-    h1 {
-      font-size: 24px;
-      font-weight: 800;
-    }
-
-    p {
-      color: #333;
-      margin-bottom: 22px;
-    }
-
-    .link {
-      display: block;
-      color: #2563eb;
-      text-decoration: underline;
-      font-weight: 600;
-      margin: 12px 0;
-      transition: color 0.2s;
-    }
-
-    .link:hover {
-      color: #1e4fc2;
-    }
   </style>
+
 </head>
+
 <body>
-  <div class="page">
-    <h1>Profiles</h1>
-    <p>Find me on these platforms:</p>
 
-    <a class="link" href="https://youtube.com/@thatbearalpha" target="_blank">
-      YouTube Channel →
-    </a>
-    <a class="link" href="https://www.roblox.com/users/4903858283/profile" target="_blank">
-      Roblox Profile →
-    </a>
-    <a class="link" href="https://roblox-bear.fandom.com/wiki/User:Thatbearalpha" target="_blank">
-      BEAR Wiki Profile →
-    </a>
+  <div class="window">
 
-    <p><a href="/" class="link">← Back to Home</a></p>
+    <div class="title-bar">
+
+      <div class="title-bar-text">
+
+        Profiles.exe
+
+      </div>
+
+      <div class="title-bar-controls">
+
+        <button aria-label="Minimize"></button>
+
+        <button aria-label="Maximize"></button>
+
+        <button aria-label="Close"></button>
+
+      </div>
+
+    </div>
+
+    <div class="window-body">
+
+      <p>
+
+        Find me on these platforms:
+
+      </p>
+
+      <div class="scrollbox">
+
+        <!-- YouTube -->
+
+        <div class="profile">
+
+          <img src="icons/youtube.png">
+
+          <div>
+
+            <div class="profile-name">
+
+              YouTube Channel
+
+            </div>
+
+            <a
+              href="https://youtube.com/@thatbearalpha"
+              target="_blank"
+            >
+
+              Open Profile →
+
+            </a>
+
+          </div>
+
+        </div>
+
+        <!-- Roblox -->
+
+        <div class="profile">
+
+          <img src="icons/roblox.png">
+
+          <div>
+
+            <div class="profile-name">
+
+              Roblox Profile
+
+            </div>
+
+            <a
+              href="https://www.roblox.com/users/4903858283/profile"
+              target="_blank"
+            >
+
+              Open Profile →
+
+            </a>
+
+          </div>
+
+        </div>
+
+        <!-- Wiki -->
+
+        <div class="profile">
+
+          <img src="icons/fandom.png">
+
+          <div>
+
+            <div class="profile-name">
+
+              BEAR Wiki Profile
+
+            </div>
+
+            <a
+              href="https://roblox-bear.fandom.com/wiki/User:Thatbearalpha"
+              target="_blank"
+            >
+
+              Open Profile →
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="bottom">
+
+        <a href="/">
+
+          <button>
+
+            ← Back to Home
+
+          </button>
+
+        </a>
+
+      </div>
+
+    </div>
+
   </div>
+
 </body>
+
 </html>
