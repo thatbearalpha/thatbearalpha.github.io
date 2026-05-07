@@ -6,93 +6,82 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BEAR Wiki Utilities</title>
 
-  <style>
-    html, body {
-      margin: 0;
-      background: #fff;
-      color: #000;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    }
+  <link rel="stylesheet" href="https://unpkg.com/98.css">
 
-    .page {
-      max-width: 760px;
-      margin: 28px auto;
-      padding: 18px;
+  <style>
+    body {
+      background: teal;
+      padding: 30px;
+      font-family: "MS Sans Serif";
+    }
+    .window {
+      width: 500px;
+      margin: auto;
+    }
+    .center {
       text-align: center;
     }
-
-    h1 {
-      font-size: 24px;
-      font-weight: 800;
-    }
-
-    p {
-      color: #333;
-      margin-bottom: 22px;
-    }
-
-    .link {
+    .links a {
       display: block;
-      color: #2563eb;
-      text-decoration: underline;
-      font-weight: 600;
-      margin: 12px 0;
-      transition: color 0.2s;
-    }
-
-    .link:hover {
-      color: #1e4fc2;
+      margin: 8px 0;
     }
   </style>
 </head>
 
 <body>
-  <div class="page">
-    <h1>BEAR Wiki Utilities</h1>
-    <p>Quick access to the Roblox BEAR Wiki:</p>
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-text">
+        BEAR Wiki Utilities
+      </div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize"></button>
+        <button aria-label="Maximize"></button>
+        <button aria-label="Close"></button>
+      </div>
+    </div>
+    <div class="window-body">
+      <p>Quick access to the Roblox BEAR Wiki:</p>
 
-    <!-- Random ANY page -->
-    <a class="link" href="https://roblox-bear.fandom.com/wiki/Special:Random" target="_blank">
-      Random Wiki Page →
-    </a>
+      <fieldset>
+        <legend>Wiki Links</legend>
+        <div class="links">
+          <a href="https://roblox-bear.fandom.com/wiki/Special:Random" target="_blank">
+            Random Wiki Page →
+          </a>
+          <a id="alpha-random" href="#">
+            Random BEAR (Alpha) Page →
+          </a>
+          <a href="https://roblox-bear.fandom.com/wiki/Roblox_BEAR_Wiki" target="_blank">
+            Wiki Home →
+          </a>
+        </div>
+      </fieldset>
 
-    <!-- ⭐ Added BEAR (Alpha) Search Button -->
-    <a id="alpha-random" class="link" href="#">
-      Random BEAR (Alpha) Page →
-    </a>
+      <br>
 
-    <a class="link" href="https://roblox-bear.fandom.com/wiki/Roblox_BEAR_Wiki" target="_blank">
-      Wiki Home →
-    </a>
-
-    <p><a href="/" class="link">← Back to Home</a></p>
+      <div class="center">
+        <a href="/"><button>← Back to Home</button></a>
+      </div>
+    </div>
   </div>
 
-  <!-- Full robust script: title search + exact footer phrase + body phrase + session de-dup -->
   <script>
     (function () {
       const wiki = "https://roblox-bear.fandom.com";
-      const maxLimit = 200; // usually plenty; API may reduce if necessary
+      const maxLimit = 200;
 
-      // Build three API endpoints:
-      // 1) title includes (Alpha)
-      // 2) exact footer "Reference/s: Bear (Alpha)"
-      // 3) body includes "Bear (Alpha)" (broader fallback)
-      const apiTitle = `${wiki}/api.php?action=query&list=search&srsearch=${encodeURIComponent('intitle:(Alpha)')}&srlimit=${maxLimit}&format=json&origin=*`;
+      const apiTitle  = `${wiki}/api.php?action=query&list=search&srsearch=${encodeURIComponent('intitle:(Alpha)')}&srlimit=${maxLimit}&format=json&origin=*`;
       const apiFooter = `${wiki}/api.php?action=query&list=search&srsearch=${encodeURIComponent('"Reference/s: Bear (Alpha)"')}&srlimit=${maxLimit}&format=json&origin=*`;
       const apiBody   = `${wiki}/api.php?action=query&list=search&srsearch=${encodeURIComponent('"Bear (Alpha)"')}&srlimit=${maxLimit}&format=json&origin=*`;
 
-      const storageKey = "bearAlphaSeen_v1"; // sessionStorage key for seen titles
+      const storageKey = "bearAlphaSeen_v1";
 
       function saveSeen(seenArr) {
-        try { sessionStorage.setItem(storageKey, JSON.stringify(seenArr)); } catch (e) { /* ignore */ }
+        try { sessionStorage.setItem(storageKey, JSON.stringify(seenArr)); } catch (e) {}
       }
       function loadSeen() {
-        try {
-          return JSON.parse(sessionStorage.getItem(storageKey) || "[]");
-        } catch (e) {
-          return [];
-        }
+        try { return JSON.parse(sessionStorage.getItem(storageKey) || "[]"); } catch (e) { return []; }
       }
 
       async function fetchJson(url) {
@@ -103,30 +92,23 @@
 
       function mergeAndDedupe(...lists) {
         const map = new Map();
-        for (const list of lists) {
-          for (const p of list) {
+        for (const list of lists)
+          for (const p of list)
             if (p && p.title) map.set(p.title, p);
-          }
-        }
         return Array.from(map.values());
       }
 
       async function getAlphaPages() {
-        // Parallel fetch; tolerate individual failures
-        const promises = [
+        const [resTitle, resFooter, resBody] = await Promise.all([
           fetchJson(apiTitle).catch(() => null),
           fetchJson(apiFooter).catch(() => null),
           fetchJson(apiBody).catch(() => null),
-        ];
-
-        const [resTitle, resFooter, resBody] = await Promise.all(promises);
-
-        const listA = resTitle?.query?.search || [];
-        const listB = resFooter?.query?.search || [];
-        const listC = resBody?.query?.search || [];
-
-        // Merge and dedupe by title
-        return mergeAndDedupe(listA, listB, listC);
+        ]);
+        return mergeAndDedupe(
+          resTitle?.query?.search  || [],
+          resFooter?.query?.search || [],
+          resBody?.query?.search   || []
+        );
       }
 
       function pickRandom(arr) {
@@ -136,44 +118,21 @@
       async function openRandomAlpha() {
         try {
           const pages = await getAlphaPages();
+          if (!pages.length) { window.open(`${wiki}/wiki/Special:Random`, "_blank"); return; }
 
-          if (!pages.length) {
-            // If API returned nothing, fallback to Special:Random
-            window.open(`${wiki}/wiki/Special:Random`, "_blank");
-            return;
-          }
-
-          // Use sessionStorage to avoid repeats during this browser session:
-          const seen = loadSeen(); // array of titles
-          const allTitles = pages.map(p => p.title);
-
-          // candidates = pages whose title is not in seen
-          let candidates = (pages.filter(p => !seen.includes(p.title)));
-
-          // If we've already shown all pages, reset seen (start over)
-          if (!candidates.length) {
-            saveSeen([]); // clear seen
-            candidates = pages.slice();
-          }
+          const seen = loadSeen();
+          let candidates = pages.filter(p => !seen.includes(p.title));
+          if (!candidates.length) { saveSeen([]); candidates = pages.slice(); }
 
           const picked = pickRandom(candidates);
-          if (!picked || !picked.title) {
-            window.open(`${wiki}/wiki/Special:Random`, "_blank");
-            return;
-          }
+          if (!picked?.title) { window.open(`${wiki}/wiki/Special:Random`, "_blank"); return; }
 
-          // Mark as seen
           seen.push(picked.title);
-          // keep seen size reasonable (not necessary but prevents huge growth)
           if (seen.length > 1000) seen.splice(0, seen.length - 1000);
           saveSeen(seen);
 
-          // Open the picked page
-          const urlTitle = encodeURIComponent(picked.title.replace(/ /g, "_"));
-          window.open(`${wiki}/wiki/${urlTitle}`, "_blank");
-
+          window.open(`${wiki}/wiki/${encodeURIComponent(picked.title.replace(/ /g, "_"))}`, "_blank");
         } catch (err) {
-          // if anything fails, fallback to Special:Random
           console.error("Random Alpha failed:", err);
           window.open(`${wiki}/wiki/Special:Random`, "_blank");
         }
