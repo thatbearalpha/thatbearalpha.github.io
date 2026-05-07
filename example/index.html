@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Kelograph Retro Site</title>
+
+    <!-- 98.css -->
+    <link rel="stylesheet" href="https://unpkg.com/98.css">
+
+    <style>
+
+        body {
+            background-color: teal;
+
+            background-image:
+            linear-gradient(
+                45deg,
+                rgba(255,255,255,0.05) 25%,
+                transparent 25%,
+                transparent 50%,
+                rgba(255,255,255,0.05) 50%,
+                rgba(255,255,255,0.05) 75%,
+                transparent 75%,
+                transparent
+            );
+
+            background-size: 40px 40px;
+
+            font-family: "MS Sans Serif";
+
+            padding: 20px;
+        }
+
+        .desktop {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 20px;
+        }
+
+        .window {
+            width: 350px;
+        }
+
+        .scrollbox {
+            height: 150px;
+
+            overflow-y: scroll;
+
+            border: 2px inset gray;
+
+            padding: 5px;
+
+            background: white;
+        }
+
+        .terminal {
+            background: black;
+
+            color: lime;
+
+            font-family: "Courier New";
+
+            padding: 10px;
+
+            height: 150px;
+
+            overflow-y: scroll;
+        }
+
+        .gif {
+            width: 88px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td {
+            padding: 5px;
+            border-bottom: 1px solid gray;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- fake startup music -->
+    <audio autoplay loop>
+        <source src="music.mp3">
+    </audio>
+
+    <marquee behavior="scroll" direction="left">
+
+        WELCOME TO KELOGRAPH UTILITIES !!!
+        UNDER CONSTRUCTION !!!
+        BEST VIEWED ON INTERNET EXPLORER !!!
+
+    </marquee>
+
+    <br>
+
+    <div class="desktop">
+
+        <!-- Welcome Window -->
+
+        <div class="window">
+
+            <div class="title-bar">
+                <div class="title-bar-text">
+                    Welcome.txt
+                </div>
+            </div>
+
+            <div class="window-body">
+
+                <h3>Hello world!</h3>
+
+                <p>
+                    This is my primitive early 2000s website.
+                </p>
+
+                <p>
+                    Visitors: 000421
+                </p>
+
+                <a href="https://google.com">
+                    Cool hyperlink
+                </a>
+
+                <br><br>
+
+                <img
+                    src="https://media.tenor.com/2roX3uxz_68AAAAC/cat-space.gif"
+                    width="120"
+                >
+
+            </div>
+
+        </div>
+
+        <!-- Converter Tool -->
+
+        <div class="window">
+
+            <div class="title-bar">
+                <div class="title-bar-text">
+                    Converter Tool
+                </div>
+            </div>
+
+            <div class="window-body">
+
+                <p>Inches to Centimeters</p>
+
+                <input
+                    type="text"
+                    id="inputBox"
+                >
+
+                <button onclick="convert()">
+                    Convert
+                </button>
+
+                <p id="result"></p>
+
+            </div>
+
+        </div>
+
+        <!-- Scrollbox -->
+
+        <div class="window">
+
+            <div class="title-bar">
+                <div class="title-bar-text">
+                    Item Database
+                </div>
+            </div>
+
+            <div class="window-body">
+
+                <div class="scrollbox">
+
+                    <table>
+
+                        <tr>
+                            <td>
+                                <img
+                                src="https://cdn-icons-png.flaticon.com/512/3523/3523063.png"
+                                width="40">
+                            </td>
+
+                            <td>
+                                <b>Sword</b><br>
+                                Basic weapon item
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <img
+                                src="https://cdn-icons-png.flaticon.com/512/3523/3522093.png"
+                                width="40">
+                            </td>
+
+                            <td>
+                                <b>Potion</b><br>
+                                Restores health
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <img
+                                src="https://cdn-icons-png.flaticon.com/512/3522/3522705.png"
+                                width="40">
+                            </td>
+
+                            <td>
+                                <b>Key</b><br>
+                                Opens secret doors
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <img
+                                src="https://cdn-icons-png.flaticon.com/512/3522/3522335.png"
+                                width="40">
+                            </td>
+
+                            <td>
+                                <b>Gem</b><br>
+                                Rare collectible
+                            </td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Terminal -->
+
+        <div class="window">
+
+            <div class="title-bar">
+                <div class="title-bar-text">
+                    terminal.exe
+                </div>
+            </div>
+
+            <div class="window-body">
+
+                <div class="terminal">
+
+                    C:\> booting system...<br><br>
+
+                    C:\> loading files...<br><br>
+
+                    C:\> welcome user<br><br>
+
+                    C:\> ERROR 404 LOL<br><br>
+
+                    C:\>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- GIF Collection -->
+
+        <div class="window">
+
+            <div class="title-bar">
+                <div class="title-bar-text">
+                    Cool GIFs
+                </div>
+            </div>
+
+            <div class="window-body center">
+
+                <img
+                class="gif"
+                src="https://cyber.dabamos.de/88x31/linux_now.gif">
+
+                <img
+                class="gif"
+                src="https://cyber.dabamos.de/88x31/ie_logo.gif">
+
+                <img
+                class="gif"
+                src="https://cyber.dabamos.de/88x31/get_java.gif">
+
+                <br><br>
+
+                <img
+                src="https://media.tenor.com/qJRMLPlRbnIAAAAC/pikachu-computer.gif"
+                width="150">
+
+            </div>
+
+        </div>
+
+        <!-- Fake Explorer -->
+
+        <div class="window">
+
+            <div class="title-bar">
+                <div class="title-bar-text">
+                    My Computer
+                </div>
+            </div>
+
+            <div class="window-body">
+
+                <ul>
+
+                    <li>
+                        📁 games
+                    </li>
+
+                    <li>
+                        📁 downloads
+                    </li>
+
+                    <li>
+                        📁 roblox_stuff
+                    </li>
+
+                    <li>
+                        📄 secret_file.txt
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        function convert() {
+
+            let inches =
+                document.getElementById("inputBox").value;
+
+            let cm = inches * 2.54;
+
+            document.getElementById("result").innerText =
+                cm + " centimeters";
+        }
+
+    </script>
+
+</body>
+
+</html>
