@@ -1,98 +1,143 @@
 <!doctype html>
-<html lang="en">
+<html>
+
 <head>
-  <link rel="icon" type="image/ico" href="/Bear_chance_icon.ico">
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>Thatbearalpha's site</title>
+
+  <link rel="icon" type="image/ico" href="/Bear_chance_icon.ico">
+
+  <link rel="stylesheet" href="https://unpkg.com/98.css">
+
   <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      background: #fff;
-      color: #000;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+    body {
+
+      background: teal;
+
+      padding: 30px;
+
+      font-family: "MS Sans Serif";
+
     }
 
-    .page {
-      max-width: 760px;
-      margin: 28px auto;
-      padding: 18px;
-      position: relative;
+    .window {
+
+      width: 500px;
+
+      margin: auto;
+
     }
 
-    header {
+    .center {
+
       text-align: center;
-      margin-bottom: 12px;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 26px;
-      font-weight: 800;
+
     }
 
-    .hero {
-      text-align: center;
-      margin: 18px 0;
-    }
-    .hero img {
-      max-width: 360px;
-      width: 70%;
-      height: auto;
-      border-radius: 8px;
-    }
+    img {
 
-    .description {
-      text-align: center;
-      max-width: 620px;
-      margin: 0 auto 24px auto;
-      font-size: 16px;
-      color: #333;
-    }
+      margin-top: 10px;
 
-    .links {
-      text-align: center;
-      font-size: 18px;
-      margin-top: 24px;
+      margin-bottom: 10px;
+
     }
 
     .links a {
+
       display: block;
-      color: #2563eb;
-      text-decoration: underline;
-      font-weight: 600;
-      margin: 10px 0;
-      transition: color 0.2s;
+
+      margin: 8px 0;
+
     }
 
-    .links a:hover {
-      color: #1e4fc2;
-    }
   </style>
+
 </head>
+
 <body>
-  <div class="page">
-    <header>
-      <h1>Thatbearalpha's site</h1>
-    </header>
 
-    <div class="hero">
-      <img
-        src="https://i.postimg.cc/QtNqTGY5/1000002812-removebg-preview.png"
-        alt="Bear relaxing"
-      />
+  <div class="window">
+
+    <div class="title-bar">
+
+      <div class="title-bar-text">
+
+        Thatbearalpha's site
+
+      </div>
+
+      <div class="title-bar-controls">
+
+        <button aria-label="Minimize"></button>
+
+        <button aria-label="Maximize"></button>
+
+        <button aria-label="Close"></button>
+
+      </div>
+
     </div>
 
-    <p class="description">
-      Welcome to my site!
-    </p>
+    <div class="window-body">
 
-    <div class="links">
-      <a href="/profiles">Profiles →</a>
-      <a href="/wiki_utilities">BEAR Wiki Utilities →</a>
-      <a href="/bear_game">Bear Alpha Game Documentation →</a>
-      <a href="/discord">Discord Server →</a>
+      <div class="center">
+
+        <h3>Welcome!</h3>
+
+        <img
+          src="https://i.postimg.cc/QtNqTGY5/1000002812-removebg-preview.png"
+          width="250"
+        >
+
+        <p>
+
+          Welcome to my site!
+          <br>
+          Here you can find resources and utilities
+
+        </p>
+
+      </div>
+
+      <fieldset>
+
+        <legend>Navigation</legend>
+
+        <div class="links">
+
+          <a href="/profiles">
+            Profiles
+          </a>
+
+          <a href="/wiki_utilities">
+            BEAR Wiki Utilities
+          </a>
+
+          <a href="/bear_game">
+            Bear Alpha Game Documentation
+          </a>
+
+          <a href="/discord">
+            Discord Server
+          </a>
+
+        </div>
+
+      </fieldset>
+
+      <br>
+
+      <marquee>
+
+        Under Construction
+
+      </marquee>
+
     </div>
+
   </div>
+
 </body>
+
 </html>
