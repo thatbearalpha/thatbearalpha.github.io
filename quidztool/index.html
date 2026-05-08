@@ -75,11 +75,19 @@
 
   <script>
     // Math:
-    // Buying:  100 Quidz = 10 Robux = $0.10  →  1 Quidz = $0.001
-    // Selling: $0.0038 per Robux, 1 Quidz = 0.1 Robux  →  1 Quidz = $0.00038
+    // Step 1 — Quidz to Robux: 37,500 Quidz = 1,600 Robux
+    //   Robux = Quidz * (1600 / 37500)
+    // Step 2 — Robux to USD:
+    //   Buy price:  Robux / 100       (100 Robux = $1)
+    //   Sell price: Robux * 0.0038    ($0.0038 per Robux)
 
     function fmt(val) {
-      return '~$' + val.toFixed(4);
+      // Up to 5 decimal places, trim trailing zeros, keep at least 2
+      let s = val.toFixed(5);
+      let [int, dec] = s.split('.');
+      dec = dec.replace(/0+$/, '');
+      if (dec.length < 2) dec = dec.padEnd(2, '0');
+      return '~$' + int + '.' + dec;
     }
 
     document.getElementById('convert-btn').addEventListener('click', function () {
@@ -93,9 +101,10 @@
         return;
       }
 
-      const quidz = Number(raw);
-      const buying  = quidz * 0.001;
-      const selling = quidz * 0.00038;
+      const quidz  = Number(raw);
+      const robux  = quidz * (1600 / 37500);
+      const buying  = robux / 100;
+      const selling = robux * 0.0038;
 
       buyEl.textContent  = fmt(buying);
       sellEl.textContent = fmt(selling);
