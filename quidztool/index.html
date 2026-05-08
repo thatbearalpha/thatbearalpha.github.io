@@ -57,32 +57,48 @@
         <div class="converter">
           <label for="quidz-input">Quidz Amount:</label>
           <input type="number" id="quidz-input" min="0" placeholder="e.g. 1000">
-          <button id="convert-btn">Convert →</button>
-          <label>Result (USD):</label>
-          <div class="result-box" id="result">—</div>
+          <button id="convert-btn">Convert &#8594;</button>
+          <label>Buying Price:</label>
+          <div class="result-box" id="result-buy">&#8212;</div>
+          <label>Selling Price:</label>
+          <div class="result-box" id="result-sell">&#8212;</div>
         </div>
       </fieldset>
 
       <br>
 
       <div class="center">
-        <a href="/"><button>← Back to Home</button></a>
+        <a href="/"><button>&#8592; Back to Home</button></a>
       </div>
     </div>
   </div>
 
   <script>
-    document.getElementById('convert-btn').addEventListener('click', function () {
-      const input = document.getElementById('quidz-input').value;
-      const resultEl = document.getElementById('result');
+    // Math:
+    // Buying:  100 Quidz = 10 Robux = $0.10  →  1 Quidz = $0.001
+    // Selling: $0.0038 per Robux, 1 Quidz = 0.1 Robux  →  1 Quidz = $0.00038
 
-      if (input === '' || isNaN(input)) {
-        resultEl.textContent = 'Please enter a valid number.';
+    function fmt(val) {
+      return '~$' + val.toFixed(4);
+    }
+
+    document.getElementById('convert-btn').addEventListener('click', function () {
+      const raw = document.getElementById('quidz-input').value;
+      const buyEl  = document.getElementById('result-buy');
+      const sellEl = document.getElementById('result-sell');
+
+      if (raw === '' || isNaN(raw) || Number(raw) < 0) {
+        buyEl.textContent  = 'Please enter a valid number.';
+        sellEl.textContent = '';
         return;
       }
 
-      // TODO: plug in conversion logic here
-      resultEl.textContent = '...';
+      const quidz = Number(raw);
+      const buying  = quidz * 0.001;
+      const selling = quidz * 0.00038;
+
+      buyEl.textContent  = fmt(buying);
+      sellEl.textContent = fmt(selling);
     });
   </script>
 </body>
