@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+  <title>Quidz to USD Converter</title>
+  <link rel="icon" type="image/ico" href="/Bear_chance_icon.ico">
+  <link rel="stylesheet" href="https://unpkg.com/98.css">
+  <style>
+    body {
+      background: teal;
+      padding: 30px;
+      font-family: "MS Sans Serif";
+    }
+    .window {
+      width: 400px;
+      margin: auto;
+    }
+    .center {
+      text-align: center;
+    }
+    .converter {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .converter label {
+      font-weight: bold;
+    }
+    .converter input {
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .result-box {
+      border: 2px inset gray;
+      background: white;
+      padding: 6px 8px;
+      min-height: 28px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-text">Bear (Alpha) Quidz to USD Converter</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize"></button>
+        <button aria-label="Maximize"></button>
+        <button aria-label="Close"></button>
+      </div>
+    </div>
+    <div class="window-body">
+      <p>Enter an amount in Quidz to convert to USD:</p>
+
+      <fieldset>
+        <legend>Converter</legend>
+        <div class="converter">
+          <label for="quidz-input">Quidz Amount:</label>
+          <input type="number" id="quidz-input" min="0" placeholder="e.g. 1000">
+          <button id="convert-btn">Convert →</button>
+          <label>Result (USD):</label>
+          <div class="result-box" id="result">—</div>
+        </div>
+      </fieldset>
+
+      <br>
+
+      <div class="center">
+        <a href="/"><button>← Back to Home</button></a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('convert-btn').addEventListener('click', function () {
+      const input = document.getElementById('quidz-input').value;
+      const resultEl = document.getElementById('result');
+
+      if (input === '' || isNaN(input)) {
+        resultEl.textContent = 'Please enter a valid number.';
+        return;
+      }
+
+      // TODO: plug in conversion logic here
+      resultEl.textContent = '...';
+    });
+  </script>
+</body>
+</html>
