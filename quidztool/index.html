@@ -10,13 +10,28 @@
       padding: 30px;
       font-family: "MS Sans Serif";
     }
-    .window {
-      width: 400px;
-      margin: auto;
+
+    .desktop {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      align-items: flex-start;
     }
+
+    .window-examples {
+      width: 200px;
+      flex-shrink: 0;
+    }
+
+    .window-converter {
+      width: 400px;
+      flex-shrink: 0;
+    }
+
     .center {
       text-align: center;
     }
+
     .converter {
       display: flex;
       flex-direction: column;
@@ -37,40 +52,124 @@
       min-height: 28px;
       color: #333;
     }
+
+    /* Example values scrollbox */
+    .examples-scroll {
+      height: 260px;
+      overflow-y: auto;
+      border: 2px inset gray;
+      background: white;
+      padding: 4px;
+    }
+    .example-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+      padding: 3px 2px;
+      border-bottom: 1px solid #ddd;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .example-row:last-child {
+      border-bottom: none;
+    }
+    .example-row:hover {
+      background: #000080;
+      color: white;
+    }
+    .ex-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .ex-val {
+      flex-shrink: 0;
+      color: #555;
+    }
+    .example-row:hover .ex-val {
+      color: #ccc;
+    }
   </style>
 </head>
 <body>
-  <div class="window">
-    <div class="title-bar">
-      <div class="title-bar-text">Bear (Alpha) Quidz to USD Converter</div>
-      <div class="title-bar-controls">
-        <button aria-label="Minimize"></button>
-        <button aria-label="Maximize"></button>
-        <button aria-label="Close"></button>
-      </div>
-    </div>
-    <div class="window-body">
-      <p>Enter an amount in Quidz to convert to USD:</p>
+  <div class="desktop">
 
-      <fieldset>
-        <legend>Converter</legend>
-        <div class="converter">
-          <label for="quidz-input">Quidz Amount:</label>
-          <input type="number" id="quidz-input" min="0" placeholder="e.g. 1000">
-          <button id="convert-btn">Convert &#8594;</button>
-          <label>Buying Price:</label>
-          <div class="result-box" id="result-buy">&#8212;</div>
-          <label>Selling Price:</label>
-          <div class="result-box" id="result-sell">&#8212;</div>
+    <!-- Example Values Window -->
+    <div class="window window-examples">
+      <div class="title-bar">
+        <div class="title-bar-text">Example Values</div>
+        <div class="title-bar-controls">
+          <button aria-label="Minimize"></button>
+          <button aria-label="Maximize"></button>
+          <button aria-label="Close"></button>
         </div>
-      </fieldset>
-
-      <br>
-
-      <div class="center">
-        <a href="/"><button>&#8592; Back to Home</button></a>
+      </div>
+      <div class="window-body">
+        <div class="examples-scroll">
+          <!-- Rows: click to autofill the converter. Add more items here. -->
+          <div class="example-row" data-quidz="100000">
+            <span class="ex-name">OmEn_MAL</span>
+            <span class="ex-val">100,000</span>
+          </div>
+          <div class="example-row" data-quidz="95000">
+            <span class="ex-name">Sam</span>
+            <span class="ex-val">95,000</span>
+          </div>
+          <div class="example-row" data-quidz="65000">
+            <span class="ex-name">Rubbermal</span>
+            <span class="ex-val">65,000</span>
+          </div>
+           <div class="example-row" data-quidz="44777">
+            <span class="ex-name">Angelic</span>
+            <span class="ex-val">44,777</span>
+          </div>
+          <div class="example-row" data-quidz="44444">
+            <span class="ex-name">Encryption</span>
+            <span class="ex-val">44,444</span>
+          </div>
+        </div>
       </div>
     </div>
+
+    <!-- Converter Window -->
+    <div class="window window-converter">
+      <div class="title-bar">
+        <div class="title-bar-text">Bear (Alpha) Quidz to USD Converter</div>
+        <div class="title-bar-controls">
+          <button aria-label="Minimize"></button>
+          <button aria-label="Maximize"></button>
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body">
+        <p>Conversions:</p>
+        <p>37,500 Quidz / 1,600 Robux</p>
+        <p>$1 / 100 Robux</p>
+        <p>(Selling) $0.0038 per Robux</p>
+        <br>
+        <p>Enter an amount in Quidz to convert to USD:</p>
+
+        <fieldset>
+          <legend>Converter</legend>
+          <div class="converter">
+            <label for="quidz-input">Quidz Amount:</label>
+            <input type="number" id="quidz-input" min="0" placeholder="e.g. 1000">
+            <button id="convert-btn">Convert &#8594;</button>
+            <label>Buying Price:</label>
+            <div class="result-box" id="result-buy">&#8212;</div>
+            <label>Selling Price:</label>
+            <div class="result-box" id="result-sell">&#8212;</div>
+          </div>
+        </fieldset>
+
+        <br>
+
+        <div class="center">
+          <a href="/"><button>&#8592; Back to Home</button></a>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <script>
@@ -90,6 +189,14 @@
       return '~$' + int + '.' + dec;
     }
 
+    function convert(quidz) {
+      const robux   = quidz * (1600 / 37500);
+      const buying  = robux / 100;
+      const selling = robux * 0.0038;
+      document.getElementById('result-buy').textContent  = fmt(buying);
+      document.getElementById('result-sell').textContent = fmt(selling);
+    }
+
     document.getElementById('convert-btn').addEventListener('click', function () {
       const raw = document.getElementById('quidz-input').value;
       const buyEl  = document.getElementById('result-buy');
@@ -101,13 +208,16 @@
         return;
       }
 
-      const quidz  = Number(raw);
-      const robux  = quidz * (1600 / 37500);
-      const buying  = robux / 100;
-      const selling = robux * 0.0038;
+      convert(Number(raw));
+    });
 
-      buyEl.textContent  = fmt(buying);
-      sellEl.textContent = fmt(selling);
+    // Click an example row to autofill + convert
+    document.querySelectorAll('.example-row').forEach(row => {
+      row.addEventListener('click', function () {
+        const val = this.dataset.quidz;
+        document.getElementById('quidz-input').value = val;
+        convert(Number(val));
+      });
     });
   </script>
 </body>
